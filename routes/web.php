@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/index', [AuthController::class, 'show']);
 
 Route::get('/app', function () {
     return view('app');

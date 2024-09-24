@@ -14,24 +14,24 @@
     ---------------- Řádek navigace ----------------
     -->
     <header class="flex gap-4 py-2 items-center justify-between px-4 pb-12">
-        <a href="./index.html">
+        <a href="./">
             <img class="w-48 min-w-28 transition duration-700 ease-in-out hover:scale-110" src="/img/logo.webp" alt="logo úkolomet">
         </a>
   
         <nav class="lg:flex hidden gap-4 text-xl ">
-            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./projekty.html">Projekty</a>
-            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukoly.html">Úkoly</a>
-            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./reporty.html">Reporty</a>
+            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./projekty">Projekty</a>
+            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukoly">Úkoly</a>
+            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./reporty">Reporty</a>
         </nav>
   
         <div class="lg:flex hidden gap-4 text-xl">
-            <a class="relative py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./dashboard.html" title="Dashboard"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <a class="relative py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./dashboard" title="Dashboard"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
               </svg>
               </a>
               
   
-            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./profil.html" title="Profil"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./profil" title="Profil"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
               </svg>
               </a>
@@ -64,7 +64,7 @@
 
 
         <main class="border border-gray-300 md:flex mx-auto items-center justify-center text-ctprim">
-            <div class="collapse md:flex md:flex-col md:visible md:bg-[url('/img/login-picture.png')] md:bg-size-full md:bg-cover md:bg-center md:text-center md:w-1/2 md:justify-center md:items-center md:py-60 md:gap-2">
+            <div class="collapse md:flex md:flex-col md:visible md:bg-[url('/public/img/login-picture.png')] md:bg-size-full md:bg-cover md:bg-center md:text-center md:w-1/2 md:justify-center md:items-center md:py-60 md:gap-2">
                 <h1 class="collapse md:visible md:text-5xl lg:text-7xl md:font-bold md:pb-12">Úkolomet</h1>
                 <p class="collapse md:visible md:text-xl md:font-bold">Mějte svoje úkoly pod kontrolou.</p>
                 <p class="collapse md:visible md:text-xl md:font-bold">Po přihlášení můžete zadávat úkoly a organizovat svůj čas.</p>
@@ -108,7 +108,7 @@
                     <div class="justify-center">
                         <div class="flex gap-2 font-bold justify-center pb-6">
                             <p>Nemám účet  </p>
-                            <a href="#">Registrace</a>
+                            <a href="/registrace">Registrace</a>
                         </div>
                         <p>nebo se přihlas přes</p>
                         <button class="font-bold">Google</button>
