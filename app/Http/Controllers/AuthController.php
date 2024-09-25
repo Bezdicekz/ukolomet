@@ -9,4 +9,14 @@ class AuthController extends Controller {
         {
             return view('/login');
         }
+
+    public function login(Request $request)
+        {
+            dd($request->email, $request->password);
+        }
+
+    public function register()
+        {
+            return view('/register');
+        }
 }
