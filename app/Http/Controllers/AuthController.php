@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller {
-    public function show(): View 
+    public function show()
         {
-            return view('index');
+            return view('/login');
         }
 }
