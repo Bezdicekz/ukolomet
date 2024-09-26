@@ -6,6 +6,7 @@
     <title>Úkolomet</title>
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 
 <body class="bg-cb1 font-sans">
@@ -266,8 +267,6 @@
       </div>
   </footer>
 
-  <script src="/resources/js/kalendar.js"></script>
-  <script src="/resources/js/timer.js"></script>
-  <script src="/resources//js/script.js"></script>
+
 </body>
 </html>
