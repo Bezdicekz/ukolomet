@@ -266,8 +266,8 @@
       </div>
   </footer>
 
-  <script src="./kalendar.js"></script>
-  <script src="./timer.js"></script>
-  <script src="./script.js"></script>
+  <script src="/resources/js/kalendar.js"></script>
+  <script src="/resources/js/timer.js"></script>
+  <script src="/resources//js/script.js"></script>
 </body>
 </html>
