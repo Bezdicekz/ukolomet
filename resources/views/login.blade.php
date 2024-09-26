@@ -103,7 +103,8 @@
                         <h1 class="text-2xl">Vítej zpět</h1>
                         <p class="py-2">Vlož svůj email, heslo a přihlaš se do Úkolometu</p>
                     </div>
-                    <form action="#" method="get" class="flex flex-col w-2/3 gap-2 py-6 mx-auto justify-center text-center">
+                    <form action="/login" method="post" class="flex flex-col w-2/3 gap-2 py-6 mx-auto justify-center text-center">
+                        @csrf
                         <label class="font-bold" for="email">Email</label>
                         <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="email" type="email" name="email" placeholder="Napiš svůj email" required>
                         <label class="font-bold" for="password">Heslo</label>

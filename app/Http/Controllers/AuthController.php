@@ -10,13 +10,13 @@ class AuthController extends Controller {
             return view('/login');
         }
 
-    public function login(Request $request)
+    public function login(Request $uzivatel)
         {
-            dd($request->email, $request->password);
+            dd($uzivatel, $uzivatel->email, $uzivatel->password);
         }
 
-    public function register()
+    public function registrace()
         {
-            return view('/register');
+            return view('/registrace');
         }
 }
