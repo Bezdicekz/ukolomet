@@ -12,11 +12,16 @@ class AuthController extends Controller {
 
     public function login(Request $uzivatel)
         {
-            dd($uzivatel, $uzivatel->email, $uzivatel->password);
+            dd($uzivatel->email, $uzivatel->password, $uzivatel->server('NUMBER_OF_PROCESSORS', $uzivatel));
         }
 
     public function registrace()
         {
             return view('/registrace');
+        }
+
+    public function zaregistruj(Request $zaregistruj)
+        {
+            dd($zaregistruj);
         }
 }

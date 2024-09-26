@@ -11,3 +11,4 @@ Route::get('/login', [AuthController::class, 'show']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/registrace', [AuthController::class, 'registrace']);
+Route::post('/registrace', [AuthController::class, 'zaregistruj']);

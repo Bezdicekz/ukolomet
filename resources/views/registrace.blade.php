@@ -103,12 +103,12 @@
                         <h1 class="text-2xl">Registrace</h1>
                         <p class="py-2">Zadej svůj e-mail a nastav heslo.</p>
                     </div>
-                    <form action="#" method="get" class="flex flex-col w-2/3 gap-2 py-6 mx-auto justify-center text-center">
-                        <label class="font-bold" for="email">Email</label>
-                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="email" type="email" name="email" placeholder="Napiš svůj email" required>
-                        <label class="font-bold" for="password">Heslo</label>
-                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password" type="password" name="password" placeholder="Napiš své heslo" required>
-                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password1" type="password" name="password1" placeholder="Potvrď své heslo" required>
+                    <form action="/registrace" method="post" class="flex flex-col w-2/3 gap-2 py-6 mx-auto justify-center text-center">
+                        <label class="font-bold" for="email1">Email</label>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="email" type="email" name="email1" placeholder="Napiš svůj email" required>
+                        <label class="font-bold" for="password1">Heslo</label>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password1" type="password" name="password1" placeholder="Napiš své heslo" required>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password2" type="password" name="password2" placeholder="Potvrď své heslo" required>
 
 
                         <button class="py-2 my-2 font-bold rounded-lg bg-cbtprim text-cbttprim hover:bg-cbtsec hover:text-cbttsec" type="submit">Registrovat se</button>
