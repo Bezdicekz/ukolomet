@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('ukoly', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('user_id');
-            $table->string('projekt_id');
-            $table->date('date_zahajeni');
-            $table->date('date_ukonceni');
+            $table->string('nazev');
+            $table->string('popis');
+            $table->string('id_uzivatele');
+            $table->boolean('status');
+            $table->string('id_projektu');
+            $table->integer('rozpocet');
+            $table->date('datum_zahajeni');
+            $table->date('planovany_datum_ukonceni');
+            $table->date('datum_ukonceni');
             $table->timestamps();
         });
     }
