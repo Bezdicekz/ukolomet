@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('projekty', function (Blueprint $table) {
             $table->id();
-            $table->string('nazev');
-            $table->string('popis');
-            $table->string('id_uzivatele');
-            $table->boolean('status');
-            $table->date('datum_zahajeni');
-            $table->date('planovany_datum_ukonceni');
-            $table->date('datum_ukonceni');
+            $table->string('nazev');                    // název projektu
+            $table->string('popis');                    // popis projektu
+            $table->integer('id_uzivatele');            // id uživatele kterému projekt patří
+            $table->integer('rozpocet');                // rozpočet projektu
+            $table->string('stav');                     // stav projektu (čeká na spuštění, v běhu, hotovo, zrušen)
+            $table->date('datum_zahajeni');             // datum zahájení projektu 
+            $table->date('planovany_datum_ukonceni');   // plánovaný datum ukončení projektu
+            $table->date('datum_ukonceni');             // skutečné datum ukončení projektu
             $table->timestamps();
         });
     }

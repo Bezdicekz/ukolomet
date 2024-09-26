@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('ukoly', function (Blueprint $table) {
             $table->id();
-            $table->string('nazev');
-            $table->string('popis');
-            $table->string('id_uzivatele');
-            $table->boolean('status');
-            $table->string('id_projektu');
-            $table->integer('rozpocet');
-            $table->date('datum_zahajeni');
-            $table->date('planovany_datum_ukonceni');
-            $table->date('datum_ukonceni');
+            $table->string('nazev');                    // název úkolu
+            $table->string('popis');                    // popis úkolu
+            $table->integer('id_uzivatele');            // id uživatele, který úkol vytvořil
+            $table->integer('id_projektu');             // id projektu k němuž patří úkol
+            $table->integer('id_nadrazeneho_ukolu');    // hodnota null - hlavní úkol
+            $table->integer('celkovy_cas_ukolu');       // sečtený celkový čas práce na úkolu
+            $table->date('datum_zahajeni');             // datum zahájení práce na úkolu
+            $table->date('planovany_datum_ukonceni');   // plánované datum ukončení úkolu
+            $table->date('datum_ukonceni');             // skutečné datum ukončení úkolu
+            $table->string('stav');                     // stav úkolu (čeká na spuštění, v běhu, hotovo, zrušený)
+            $table->integer('rozpocet');                // pránovaný rozpočet úkolu
             $table->timestamps();
         });
     }
