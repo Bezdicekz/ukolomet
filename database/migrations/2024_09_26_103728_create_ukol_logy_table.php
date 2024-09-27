@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ukol_logy', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_ukolu');
-            $table->time('cas_prace');
-            $table->integer('naklady');
-            $table->date('datum');
+            $table->id();                   
+            $table->integer('id_ukolu');    // id úkolu
+            $table->time('cas_prace');      // Čas strávený prací
+            $table->integer('naklady');     // dosavadní náklady práce na úkol
+            $table->date('datum');          // Datum práce na úkolu
             $table->timestamps();
         });
     }

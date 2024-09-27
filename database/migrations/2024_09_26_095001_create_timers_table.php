@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('timers', function (Blueprint $table) {
             $table->id();
             $table->integer('id_ukolu');    // id úkolu k němuž běží čas
-            $table->integer('start_cas');  // startovací čas
-            $table->boolean('spusteno');
+            $table->integer('start_cas');   // startovací čas
+            $table->boolean('spusteno');    // běží čas nebo ne?
             $table->timestamps();
         });
     }
