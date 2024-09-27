@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 Route::view('/', 'index');
-Route::view('/dashboard', 'dashboard');
+Route::view('/dashboard', 'dashboard')->name('dashboard'); // jméno mohu použít pro přesměrování (viz AuthController)
 
 
 Route::get('/login', [AuthController::class, 'show']);

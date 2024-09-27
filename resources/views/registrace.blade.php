@@ -106,16 +106,46 @@
                     <form action="/registrace" method="post" class="flex flex-col w-2/3 py-6 mx-auto justify-center text-center">
                         @csrf
                         <label class="font-bold text-sm" for="jmeno">Jméno a příjmení</label>
-                        <input class="text-center rounded-lg border border-ctsec py-2 mb-4 text-xs" id="jmeno" type="text" name="jmeno" placeholder="Napiš jméno a příjmení" required>
-                        <label class="font-bold text-sm" for="email">Email</label>
-                        <input class="text-center rounded-lg border border-ctsec py-2 mb-4 text-xs" id="email" type="email" name="email" placeholder="Napiš svůj email" required>
-                        <label class="font-bold text-sm" for="password1">Heslo</label>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="jmeno" type="text" name="jmeno" placeholder="Napiš jméno a příjmení" required>
+
+                        <!-- validace pro pole jmeno -->
+                        @error('jmeno')
+                            <div class="text-xs font-bold text-red-500">{{ $message }}</div>
+                        @enderror
+                        
+
+                        <label class="font-bold text-sm mt-4" for="email">Email</label>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="email" type="email" name="email" placeholder="Napiš svůj email" required>¨
+
+                        <!-- validace pro pole email -->
+                        @error('email')
+                            <div class="text-xs font-bold text-red-500">{{ $message }}</div>
+                        @enderror
+
+                        <label class="font-bold text-sm mt-4" for="password1">Heslo</label>
                         <input class="text-center rounded-lg border border-ctsec py-2 mb-2 text-xs" id="password1" type="password" name="password1" placeholder="Napiš své heslo" required>
-                        <input class="text-center rounded-lg border border-ctsec py-2 mb-4 text-xs" id="password2" type="password" name="password2" placeholder="Potvrď své heslo" required>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password2" type="password" name="password2" placeholder="Potvrď své heslo" required>
+
+                        <!-- validace pro pole heslo -->
+                        @error('password1')
+                            <div class="text-xs font-bold text-red-500">{{ $message }}</div>
+                        @enderror
 
 
-                        <button class="py-2 my-2 font-bold rounded-lg bg-cbtprim text-cbttprim hover:bg-cbtsec hover:text-cbttsec" type="submit">Registrovat se</button>
+                        <button class="py-2 my-2 mt-4 font-bold rounded-lg bg-cbtprim text-cbttprim hover:bg-cbtsec hover:text-cbttsec" type="submit">Registrovat se</button>
 
+                        <!--
+                        Validace, která pod formulář vypíše všechny chyby.
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li class="text-red-500">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif 
+                        -->
                     </form>
 
                     <div class="justify-center">
