@@ -20,8 +20,8 @@ class AuthController extends Controller {
             return view('/registrace');
         }
 
-    public function zaregistruj(Request $zaregistruj)
+    public function zaregistruj(Request $registrace)
         {
-            dd($zaregistruj);
+            dd($registrace->jmeno, $registrace->email, $registrace->password1, $registrace->password2);
         }
 }
