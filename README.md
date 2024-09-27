@@ -7,60 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## O Úkolometu
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Úkolomet je webová aplikace v Laravelu, která slouží ke správě úkolů:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Třídění úkolů.
+- Nastavení priority úkolů.
+- Seskupování úkolů.
+- Řízení projektů.
+- Synchronizace napříč zařízeními.
+- Uživatelská oprávnění.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Efektivní správa úkolů s Úkolometem. S Úkolometem už nikdy nezapomenete na žádný úkol.
 
-## Learning Laravel
+## Jak to funguje
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Přihlášení
+    Přihlášení do aplikace zajistí, že jsou vaše seznamy úkolů chráněny před očima nepovolaných lidí. Díky přihlášení do aplikace také můžete individuálně nastavovat důležité věci, jako je třeba přístrojová deska a další možnosti aplikace.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Vytvoření úkolu
+    Přidejte nové úkoly jednoduše kliknutím na tlačítko „Přidat úkol“. Zadejte název, popis a nastavte termín splnění. Můžete si také nastavit čas a cenu práce za úkol nebo hodinu.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Třídění a organizace
+    Rozdělte své úkoly do kategorií nebo projektů a nastavte jim priority, abyste vždy věděli, co je důležité.
 
-## Laravel Sponsors
+4. Nastavení připomínek
+    U každého úkolu můžete nastavit automatické upomínky, které vás upozorní na blížící se termíny.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. Synchronizace napříč zařízeními
+    Díky tomu, že se jedná o webovou aplikaci, Vaše úkoly se automaticky synchronizují na všech zařízeních, ať už používáte telefon, tablet nebo počítač.
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Sledování pokroku
+    Označujte splněné úkoly a sledujte svůj postup, díky čemuž budete mít vždy přehled o tom, co už máte hotové a co vás ještě čeká.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Úkolomet is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
