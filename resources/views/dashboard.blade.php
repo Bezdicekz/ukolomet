@@ -137,6 +137,8 @@
           </div>
           </div>
         </div>
+
+        <!-- Nedcházející úkoly -->    
         <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
           <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
 

@@ -53,11 +53,11 @@ function updateKalendar() {
   for (let day = 1; day <= denvMesici; day++) {
     const poleDen = document.createElement('div');
     poleDen.textContent = day;
-    poleDen.classList.add('p-2', 'hover:bg-gray-200', 'cursor-pointer');
+    poleDen.classList.add('p-2', 'transition', 'duration-500', 'ease-in-out', 'rounded-full', 'hover:bg-cbtprim', 'hover:text-white', 'cursor-pointer');
     
     // Zvýraznění aktuálního dne
     if (day === dnes && aktualniMesic === aktualniDatum.getMonth() && aktualniRok === aktualniDatum.getFullYear()) {
-        poleDen.classList.add('bg-gray-400', 'text-white', 'rounded-full');
+        poleDen.classList.add('bg-cb2', 'text-white', 'rounded-full');
     }
     
     dnyKalendare.appendChild(poleDen);

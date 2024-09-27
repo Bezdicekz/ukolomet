@@ -12,7 +12,7 @@ class AuthController extends Controller {
 
     public function login(Request $uzivatel)
         {
-            dd($uzivatel->email, $uzivatel->password, $uzivatel->server('NUMBER_OF_PROCESSORS', $uzivatel));
+            dd($uzivatel->email, $uzivatel->password, $uzivatel->server('COMPUTERNAME'), $uzivatel);
         }
 
     public function registrace()
@@ -22,6 +22,6 @@ class AuthController extends Controller {
 
     public function zaregistruj(Request $registrace)
         {
-            dd($registrace->jmeno, $registrace->email, $registrace->password1, $registrace->password2);
+            dd($registrace->jmeno, $registrace->email, $registrace->password1, $registrace->password2, $registrace->server('COMPUTERNAME'), $registrace);
         }
 }
