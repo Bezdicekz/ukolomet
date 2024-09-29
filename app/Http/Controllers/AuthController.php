@@ -28,7 +28,7 @@ class AuthController extends Controller {
 
             $validated = $registrace->validate([
                 'jmeno' => 'required|min:3',
-                'email' => 'required|unique:users,email',
+                'email' => 'required|unique:users,email', // validuje email jestli existuje v databázi.
                 'password1' => 'required',
             ],
             [
