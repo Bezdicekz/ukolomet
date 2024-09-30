@@ -11,6 +11,29 @@ class AuthController extends Controller {
             return view('/login');
         }
 
+        public function authenticate(Request $request): RedirectResponse
+        {
+            // Validace vstupních údajů
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+        
+            // Pokus o přihlášení uživatele
+            if (Auth::attempt($credentials)) {
+                // Pokud je uživatel ověřen, regeneruje se session
+                $request->session()->regenerate();
+        
+                // Přesměrování na zamýšlenou stránku (např. dashboard)
+                return redirect()->intended('dashboard');
+            }
+        
+            // Pokud přihlášení selže, vrátí chybu
+            return back()->withErrors([
+                'email' => 'Přihlašovací údaje nejsou správné',
+            ])->onlyInput('email');
+        }
+
     public function login(Request $uzivatel)
         {
             dd($uzivatel->email, $uzivatel->password, $uzivatel->server('COMPUTERNAME'), $uzivatel);
