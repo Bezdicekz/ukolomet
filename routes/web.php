@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::view('/', 'index');
 Route::view('/dashboard', 'dashboard')->name('dashboard'); // jméno mohu použít pro přesměrování (viz AuthController)
@@ -14,10 +16,10 @@ Route::get('/dashboard', function() {
 })->middleware('auth')->name('dashboard');
 
 
-
+Route::post('/login', [AuthController::class, 'authenticate']);
 Route::get('/login', [AuthController::class, 'show'])->name('login');
 
-Route::post('/login', [AuthController::class, 'login']);
+/* Route::post('/login', [AuthController::class, 'login']); */
 
 Route::get('/registrace', [AuthController::class, 'registrace']);
 Route::post('/registrace', [AuthController::class, 'zaregistruj']);

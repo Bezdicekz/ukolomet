@@ -4,40 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller {
     public function show()
-        {
-            return view('/login');
+    {
+        return view('login');
+    }
+
+    public function authenticate(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        // Použití Auth::attempt pro ověření uživatele
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
         }
 
-        public function authenticate(Request $request): RedirectResponse
-        {
-            // Validace vstupních údajů
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
-        
-            // Pokus o přihlášení uživatele
-            if (Auth::attempt($credentials)) {
-                // Pokud je uživatel ověřen, regeneruje se session
-                $request->session()->regenerate();
-        
-                // Přesměrování na zamýšlenou stránku (např. dashboard)
-                return redirect()->intended('dashboard');
-            }
-        
-            // Pokud přihlášení selže, vrátí chybu
-            return back()->withErrors([
-                'email' => 'Přihlašovací údaje nejsou správné',
-            ])->onlyInput('email');
-        }
+        // Pokud ověření selže, vrátí chybu
+        return back()->withErrors([
+            'email' => 'Přihlašovací údaje nejsou správné',
+        ])->onlyInput('email');
+    }
 
-    public function login(Request $uzivatel)
+
+    /* public function login(Request $uzivatel)
         {
             dd($uzivatel->email, $uzivatel->password, $uzivatel->server('COMPUTERNAME'), $uzivatel);
-        }
+        } */
 
     public function registrace()
         {
