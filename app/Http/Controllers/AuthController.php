@@ -24,7 +24,7 @@ class AuthController extends Controller {
     public function zaregistruj(Request $registrace)
         {
 
-            // Validace
+            // Validace formuláře - Registrace
 
             $validated = $registrace->validate([
                 'jmeno' => 'required|min:3',
