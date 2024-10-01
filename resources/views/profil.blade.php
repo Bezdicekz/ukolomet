@@ -84,18 +84,31 @@
                     <a href="./profil">
                         <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Profil</p>
                     </a>
-                    <a href="./login">
-                        <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Přihlášení</p>
-                    </a>
+                    @if (Auth::check())
+                        <!-- Uživatel je přihlášený - zobrazit ikonu pro odhlášení -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer" title="Odhlásit">Odhlásit
+                            </button>
+                        </form>
+                    @else
+                        <!-- Uživatel není přihlášený - zobrazit ikonu pro přihlášení -->
+                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="{{ route('login') }}" title="Přihlášení">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                            </svg>
+                        </a>
+                    @endif
                 </div>
             </div>
         </header>
 
 </div>
 
-    <main class="flex flex-col gap-6">
-    <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-6">Upravit profil</h2>
+    <main class="w-1/2 mx-auto text-center text-ctprim">
+    <div class="mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="text-center text-2xl font-bold mb-6">Upravit profil</h2>
+        <h3 class="text-center text-xl font-bold mb-6">Zde můžete měnit informace o svém profilu</h3>
 
         @if(session('status'))
             <div class="bg-green-500 text-white p-4 rounded mb-4">
@@ -103,53 +116,60 @@
             </div>
         @endif
 
-        <form action="{{ route('profile.update') }}" method="POST">
+        <form class="flex flex-col text-ctprim" action="{{ route('profile.update') }}" method="POST">
             @csrf
 
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Jméno</label>
-                <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                @error('name')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+            <div class="flex mx-auto mb-6">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium">Jméno</label>
+                    <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-center">
+                    @error('name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            
+
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium">Email</label>
+                    <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-center">
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                @error('email')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+            <div class="flex mx-auto mb-6">
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium">Nové heslo</label>
+                    <input type="password" name="password" id="password" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-center">
+                    @error('password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="password_confirmation" class="block text-sm font-medium">Potvrzení hesla</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-center">
+                </div>
             </div>
 
-            <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray-700">Nové heslo</label>
-                <input type="password" name="password" id="password" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
+            <div class="flex mx-auto mb-6">
+                <div class="mb-4">
+                    <label for="hodinova-sazba" class="block text-sm font-medium">Hodinová sazba (v Kč)</label>
+                    <input type="number" name="hodinova-sazba" id="hodinova-sazba" value="{{ old('hodinova-sazba', $user->{'hodinova-sazba'}) }}" 
+                        class="mt-1 block w-full border-gray-100 rounded-md shadow-sm focus:ring-indigo-100 focus:border-indigo-100 sm:text-sm text-center">
+                    @error('hodinova-sazba')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
-            <div class="mb-4">
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Potvrzení hesla</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <div class="mb-4">
-                <label for="hodinova-sazba" class="block text-sm font-medium text-gray-700">Hodinová sazba</label>
-                <input type="number" name="hodinova-sazba" id="hodinova-sazba" value="{{ old('hodinova-sazba', $user->{'hodinova-sazba'}) }}" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                @error('hodinova-sazba')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-500">Uložit</button>
+            <div class="flex justify-center">
+                <button type="submit" class="px-4 py-2 bg-cbtprim text-cbttprim font-bold rounded hover:bg-cbtsec hover:text-cbttsec">Uložit</button>
             </div>
         </form>
     </div>
