@@ -13,31 +13,31 @@ class AuthController extends Controller {
         return view('login');
     }
 
-    public function authenticate(Request $request): RedirectResponse
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
 
-        // Použití Auth::attempt pro ověření uživatele
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
-        }
-
-        // Pokud ověření selže, vrátí chybu
-        return back()->withErrors([
-            'email' => 'Přihlašovací údaje nejsou správné',
-        ])->onlyInput('email');
-    }
-
-
-    /* public function login(Request $uzivatel)
+    public function login(Request $uzivatel)
         {
             dd($uzivatel->email, $uzivatel->password, $uzivatel->server('COMPUTERNAME'), $uzivatel);
-        } */
+        } 
+        
+    public function authenticate(Request $request): RedirectResponse
+        {
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+    
+            // Použití Auth::attempt pro ověření uživatele
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+    
+                return redirect()->intended('dashboard');
+            }
+    
+            // Pokud ověření selže, vrátí chybu
+            return back()->withErrors([
+                'email' => 'Přihlašovací údaje nejsou správné',
+            ])->onlyInput('email');
+        }
 
     public function registrace()
         {
