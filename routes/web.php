@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::view('/', 'index');
-Route::view('/dashboard', 'dashboard')->name('dashboard'); // jméno mohu použít pro přesměrování (viz AuthController)
 
 
 /* Route::get('/dashboard', [DashboardController::class, 'zobrazitDashboard'])->middleware('auth')->name('dashboard');
@@ -34,6 +33,7 @@ Route::get('/registrace', [AuthController::class, 'registrace']);
 Route::post('/registrace', [AuthController::class, 'zaregistruj']);
 
 Route::middleware('auth')->group(function() {
+    Route::view('/dashboard', 'dashboard')->name('dashboard'); // jméno mohu použít pro přesměrování (viz AuthController)
     Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
 });
