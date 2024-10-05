@@ -11,9 +11,10 @@ class DashboardController extends Controller
 {
     public function show() 
     {
+        // Nejprve se zeptám na data modelu
         $ukoly = Ukoly::where('id_uzivatele', Auth::id())->get();
 
-        
+        // Pole dat přidám jako parametr ke stránce
         return view('dashboard',["ukoly" => $ukoly]);
     }
 }

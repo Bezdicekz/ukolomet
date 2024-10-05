@@ -75,18 +75,21 @@
         </div>
 
         <!-- Nedcházející úkoly -->    
+       
+
         <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
           <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
-
+            @foreach($ukoly as $ukol)
+          
                         <!-- seznam aktuálních úkolů -->     
                         <div class="flex gap-2 items-center">
                           
                           <!-- Ikona spuštění úkol je hotový -->
                           <div id="hotovo" class="w-4 h-4 border border-gray-300 rounded-md hover:border-gray-800"></div>
                           <div class="flex flex-col w-4/6">
-                            <p>Úkol 1</p>
+                            <p>{{$ukol->nazev}}</p>
                             <!-- Uběhnutý čas úkolu -->
-                            <p id="cas-ukolu" x-text="finalTime" class="hover:text-gray-800 text-gray-300 text-left">00:00:00</p>
+                            <p id="cas-ukolu" x-text="finalTime" class="hover:text-gray-800 text-gray-300 text-left">{{$ukol->celkovy_cas_ukolu}}</p>
                           </div>
                           <div class="flex gap-2 items-center ml-auto pr-2"> 
                             <!-- Aplikuj timer po kliknutí na play -->
@@ -121,11 +124,15 @@
                               </svg>
                           </div>
                       </div>
+            @endforeach
         </div>
+
+        
 
         <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
           <h2 class="text-lg font-semibold pb-6">Projekty:</h2>
 
+        
           <!-- seznam aktuálních úkolů -->     
           <div class="flex gap-2 items-center">
             
