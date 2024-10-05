@@ -9,6 +9,8 @@ class Ukoly extends Model
 {
     use HasFactory;
 
+    protected $table = 'ukoly'; // Explicitní definice tabulky
+
     // sloupce otevřená pro zápis
     protected $fillable = [
         'nazev',
