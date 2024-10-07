@@ -84,5 +84,42 @@
 
             {{$slot}}
 
-</body>
+    <footer class="bg-ctsec">
+      <div class="text-cb1 my-6 px-6 py-6 lg:flex md:mx-20 lg:mx-48">
+          <ul class="text-center w-1/3">
+              <li class="text-xl font-bold pb-4">Informace</li>
+              <p class="px-20">Úkolomet je webová aplikace, která pomáhá s organizací úkolů. Po přihlášení se zobrazí další volby a nastavení.</p>
+              <p>Všechny osobní údaje budou použity výhradně pro účely této aplikace.</p>
+              <p class="text-xl font-bold pt-6 pb-2">Více informací:</p>
+              <a class="font-bold hover:text-cb2" href="./osobni-udaje">Zpracování osobních údajů</a>
+          </ul>
+
+          <ul class="text-center w-1/3">
+              <li class="text-xl font-bold pb-4">Kontakt</li>
+              <li class="font-bold py-2">Adresa</li>
+              <li class="text-cb3 font-bold">Zdeněk Bezdíček</li>
+              <li>17. listopadu 475</li>
+              <li>Klášterec nad Ohří</li>
+              <li class="font-bold py-2">Telefon</li>
+              <li class="text-cb3 font-bold">+420 774 253 976</li>
+              <li class="font-bold py-2">E-mail</li>
+              <li>zdenek.bezdicek@gmail.com</li>
+          </ul>
+
+          <ul class="flex flex-col gap-2 text-center w-1/3">
+              <li class="px-3 text-xl font-bold pb-4">Odkazy</li>
+              <li class="px-3 font-bold py-2">Úkolomet</li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./">Hlavní stránka</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./projekty">Projekty</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./ukoly">Úkoly</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./reporty">Reporty</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./dashboard">Dashboard</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./profil">Profil</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./registrace">Registrace</a></li>
+              <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./login">Přihlášení</a></li>
+          </ul>
+      </div>
+  </footer>
+
+  </body>
 </html>
