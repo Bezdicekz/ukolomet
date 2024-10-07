@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UkolyController;
 
 
 
@@ -25,4 +26,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
     Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/ukol', [UkolyController::class, 'show'])->name('ukol');
+    Route::post('/ukol', [UkolyController::class, 'store'])->name('ukoly.store');
 }); 

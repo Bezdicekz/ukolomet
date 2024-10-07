@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Přihlášení | Úkolomet</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 
 <x-layouts.app>
@@ -52,7 +52,11 @@
                             </div>
                         </div>
 
-                        <button class="py-2 rounded-lg bg-cbtprim text-cbttprim hover:bg-cbtsec hover:text-cbttsec" type="submit">Přihlaš se</button>
+                        <x-button>Přihlaš se</x-button>
+
+                        <!--
+                        <button class="py-2 rounded-lg bg-cbtprim text-cbttprim hover:bg-cbtsec hover:text-cbttsec" type="submit">Přihlaš se</button> 
+                        -->
 
                     </form>
 
