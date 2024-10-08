@@ -15,15 +15,11 @@ class DashboardController extends Controller
         // Získám aktuální datum
         $dnesniDatum = Carbon::now()->format('Y-m-d');
 
-      
-        
         // Nejprve se zeptám na data modelu
         $ukoly = Ukoly::where('id_uzivatele', Auth::id())->get();
 
         // Načtu úkoly, které patří přihlášenému uživateli a mají datum ukončení dnes
-        $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())
-                      ->whereDate('datum_ukonceni', $dnesniDatum)
-                      ->get();
+        $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())->whereDate('datum_ukonceni', $dnesniDatum)->get();
 
 
         // Předám obě sady dat do pohledu
