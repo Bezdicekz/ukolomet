@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjektyController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UkolyController;
+use App\Http\Controllers\ProjektController;
 
 
 
@@ -28,4 +30,6 @@ Route::middleware('auth')->group(function() {
     Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/ukol', [UkolyController::class, 'show'])->name('ukol');
     Route::post('/ukol', [UkolyController::class, 'store'])->name('ukoly.store');
+    Route::get('/projekty', [ProjektyController::class, 'show'])->name('projekty');
+    Route::resource('projekty', ProjektyController::class);
 }); 
