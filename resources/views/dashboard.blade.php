@@ -43,15 +43,16 @@
 
             <!-- seznam aktuálních úkolů -->
 
-            <div class="flex gap-2 items-center">
+            <div class="flex flex-col gap-2 items-center">
               
-              @foreach ($dnesniukoly as $ukol)
+              @foreach ($dnesniukoly as $dnesniukol)
+              
                 <!-- Ikona dokončení úkolu -->
                 <div id="hotovo" class="w-4 h-4 border border-gray-300 rounded-md hover:border-gray-800"></div>
-                <p class="w-4/6">{{ $ukol->nazev }}</p>
+                <p class="w-4/6">{{ $dnesniukol->nazev }}</p>
 
-                  <!-- Skryté pole pro ID úkolu -->
-                  <input type="hidden" name="ukol_id[]" value="{{ $ukol->id }}">
+                  
+                  
 
                 <div class="flex gap-2 items-center ml-auto pr-2">
                     
@@ -82,9 +83,6 @@
         <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
           <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
             @foreach($ukoly as $ukol)
-
-              <!-- Skryté pole pro ID úkolu -->
-              <input type="hidden" name="ukol_id[]" value="{{ $ukol->id }}">
 
               <!-- seznam aktuálních úkolů -->     
               <div class="flex gap-2 items-center">

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrace</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <title>Registrace | Úkolomet</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 
 <body class="bg-cb1 font-sans">

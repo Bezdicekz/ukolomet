@@ -19,9 +19,11 @@ class DashboardController extends Controller
         $ukoly = Ukoly::where('id_uzivatele', Auth::id())->get();
 
         // Načtu úkoly, které patří přihlášenému uživateli a mají datum ukončení dnes
-        $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())->whereDate('datum_ukonceni', $dnesniDatum)->get();
+        $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())
+        ->whereDate('planovany_datum_ukonceni', $dnesniDatum)
+        ->get();
 
-
+        
         // Předám obě sady dat do pohledu
         return view('dashboard', [
             "ukoly" => $ukoly, 
