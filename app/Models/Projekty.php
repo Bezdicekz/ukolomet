@@ -20,5 +20,6 @@ class Projekty extends Model
         'datum_ukonceni',
         'Mnozstvi_casu',
         'planovana_naklady',
+        'uzivatel_id',
     ];
 }
