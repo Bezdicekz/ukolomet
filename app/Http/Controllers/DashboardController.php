@@ -23,11 +23,35 @@ class DashboardController extends Controller
         ->whereDate('planovany_datum_ukonceni', $dnesniDatum)
         ->get();
 
+        // Načtu úkoly, které patří přihlášenému uživateli a jsou dokončené
+        $dokonceneukoly = Ukoly::where('id_uzivatele', Auth::id())
+        ->whereDate('stav', 'dokonceny')
+        ->get();
+
         
         // Předám obě sady dat do pohledu
         return view('dashboard', [
             "ukoly" => $ukoly, 
-            "dnesniukoly" => $dnesniukoly
+            "dnesniukoly" => $dnesniukoly,
+            "dokonceneukoly" => $dokonceneukoly
         ]);
     }
+
+
+    public function destroy($id)
+    {   
+        $ukol = Ukoly::findOrFail($id);
+        $ukol->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně smazán.');
+    }
+
+    public function edit($id)
+    {
+        $ukol = Ukoly::findOrFail($id);
+        return view('edit', compact('ukol'));
+    }
+
+
+
 }

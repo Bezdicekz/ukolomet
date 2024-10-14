@@ -30,6 +30,10 @@ Route::middleware('auth')->group(function() {
     Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/ukol', [UkolyController::class, 'show'])->name('ukol');
     Route::post('/ukol', [UkolyController::class, 'store'])->name('ukoly.store');
+    Route::delete('/ukol/{id}', [DashboardController::class, 'destroy'])->name('ukol.destroy');
+    Route::get('/ukol/{id}/edit', [DashboardController::class, 'edit'])->name('ukol.edit');
+    Route::put('/ukol/{id}', [DashboardController::class, 'update'])->name('ukol.update');
+
     Route::get('projekty', [ProjektyController::class, 'index'])->name('projekty.index');
     Route::get('projekty/create', [ProjektyController::class, 'create'])->name('projekty.create');
     Route::post('projekty', [ProjektyController::class, 'store'])->name('projekty.store');
