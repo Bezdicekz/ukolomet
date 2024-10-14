@@ -42,7 +42,7 @@
 
             <!-- seznam aktuálních úkolů -->
             @foreach ($dnesniukoly as $dnesniukol)
-            <div class="flex gap-2 items-center">
+            
               
               
               <div class="flex gap-6 items-center">
@@ -68,7 +68,7 @@
                     </svg>
                 </div>
               </div>  
-            </div>
+            
             @endforeach
         </div>
           </div>
