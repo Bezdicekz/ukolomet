@@ -16,20 +16,23 @@ class DashboardController extends Controller
         $dnesniDatum = Carbon::now()->format('Y-m-d');
 
         // Nejprve se zeptám na data modelu
-        $ukoly = Ukoly::where('id_uzivatele', Auth::id())->get();
+        $ukoly = Ukoly::where('id_uzivatele', Auth::id())
+        ->where('stav', '!=', 'dokonceny')
+        ->get();
 
-        // Načtu úkoly, které patří přihlášenému uživateli a mají datum ukončení dnes
+        // Načtu úkoly, které patří přihlášenému uživateli, mají datum ukončení dnes a nejsou dokončené
         $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())
         ->whereDate('planovany_datum_ukonceni', $dnesniDatum)
+        ->where('stav', '!=', 'dokonceny')
         ->get();
 
         // Načtu úkoly, které patří přihlášenému uživateli a jsou dokončené
         $dokonceneukoly = Ukoly::where('id_uzivatele', Auth::id())
-        ->whereDate('stav', 'dokonceny')
+        ->where('stav', 'dokonceny')
         ->get();
 
         
-        // Předám obě sady dat do pohledu
+        // Předám všechny sady dat do pohledu
         return view('dashboard', [
             "ukoly" => $ukoly, 
             "dnesniukoly" => $dnesniukoly,
@@ -52,6 +55,17 @@ class DashboardController extends Controller
         return view('edit', compact('ukol'));
     }
 
-
+    public function complete($id)
+    {
+        // Najdi úkol
+        $ukol = Ukoly::findOrFail($id);
+    
+        // Aktualizuj stav úkolu na 'dokonceny'
+        $ukol->stav = 'dokonceny';
+        $ukol->save();
+    
+        // Přesměruj zpět na dashboard s potvrzující zprávou
+        return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně dokončen.');
+    }
 
 }

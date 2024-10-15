@@ -28,11 +28,6 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="id_uzivatele" class="block text-sm font-medium text-gray-700">ID uživatele</label>
-                    <input type="number" name="id_uzivatele" id="id_uzivatele" class="mt-1 block w-full p-2 border rounded-md" required>
-                </div>
-
-                <div class="mb-4">
                     <label for="id_projektu" class="block text-sm font-medium text-gray-700">ID projektu</label>
                     <input type="number" name="id_projektu" id="id_projektu" class="mt-1 block w-full p-2 border rounded-md" required>
                 </div>

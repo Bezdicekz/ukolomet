@@ -91,7 +91,12 @@
               <div class="flex gap-2 items-center">
                 
                 <!-- Ikona spuštění úkol je hotový -->
-                <div id="hotovo" class="w-4 h-4 border border-gray-300 rounded-md hover:border-gray-800"></div>
+                <form action="{{ route('ukol.complete', $ukol->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn-complete w-4 h-4 border border-gray-300 rounded-md hover:border-gray-800"></button>
+                </form>
+                
                 <div class="flex flex-col w-4/6">
                   <p>{{$ukol->nazev}}</p>
 
@@ -126,9 +131,9 @@
                   </div>
                   
                   <!-- Ikona edituj úkol -->
-                  <svg id="edituj-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <a href="{{ route('ukol.edit', $ukol->id) }}" class="btn-edit"><svg id="edituj-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                  </svg>
+                  </svg></a>
       
                   <!-- Ikona smaž úkol -->
                   <form action="{{ route('ukol.destroy', $ukol->id) }}" method="POST">
@@ -140,9 +145,43 @@
                         </button>
                   </form>
 
-                  <!-- Tlačítko pro editaci -->
-                  <a href="{{ route('ukol.edit', $ukol->id) }}" class="btn-edit">Editovat</a>
-
+                  <!-- Připravné modální okno -->
+                  <div x-data="{ modalOpen: false }"
+                      @keydown.escape.window="modalOpen = false"
+                      class="relative z-50 w-auto h-auto">
+                      <button @click="modalOpen=true" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Open</button>
+                      <template x-teleport="body">
+                          <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                              <div x-show="modalOpen" 
+                                  x-transition:enter="ease-out duration-300"
+                                  x-transition:enter-start="opacity-0"
+                                  x-transition:enter-end="opacity-100"
+                                  x-transition:leave="ease-in duration-300"
+                                  x-transition:leave-start="opacity-100"
+                                  x-transition:leave-end="opacity-0"
+                                  @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                              <div x-show="modalOpen"
+                                  x-trap.inert.noscroll="modalOpen"
+                                  x-transition:enter="ease-out duration-300"
+                                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                  x-transition:leave="ease-in duration-200"
+                                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                  class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                                  <div class="flex items-center justify-between pb-2">
+                                      <h3 class="text-lg font-semibold">Editace úkolu</h3>
+                                      <button @click="modalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>  
+                                      </button>
+                                  </div>
+                                  <div class="relative w-auto">
+                                      <p>V tomto okně bude formulář pro editaci úkolu.</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </template>
+                  </div>
                 </div>
             </div>
             @endforeach
@@ -178,14 +217,22 @@
           <h2 class="text-lg font-semibold pb-6">Dokončené úkoly:</h2>
 
             <!-- seznam dokončených úkolů -->     
-            <div class="flex gap-2 items-center">
-      
-              <!-- Ikona spuštění úkol je hotový -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              
-              <p class="w-4/6">Úkol 1</p>
+            <div class="flex flex-col gap-2 items-left">
+
+              @foreach ($dokonceneukoly as $dokoncenyukol)
+              <div class="flex gap-2">
+              <div class="flex gap-2 text-left">
+                  <!-- Ikona spuštění úkol je hotový -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  
+                      <p>{{$dokoncenyukol->nazev}}</p>
+
+                    <!-- Skryté pole pro ID -->
+                    <input type="hidden" name="ukol_id" value="{{ $dokoncenyukol->id }}">
+              </div>
+
               <div class="flex gap-2 items-center ml-auto pr-2">
                 <!-- Ikona spuštění úkolu -->
                 <svg id="spust-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -200,8 +247,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:text-gray-800 w-6 h-6 text-gray-300">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                   </svg>
-              </div>  
+              </div> 
+              </div> 
+              @endforeach
             </div>
+            
         </div>
       
         
