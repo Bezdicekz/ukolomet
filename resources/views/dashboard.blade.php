@@ -109,24 +109,24 @@
                 <div class="flex gap-2 items-center ml-auto pr-2"> 
 
                   <!-- Aplikuj timer po kliknutí na play -->
-                  <div x-data="timerApp()">
+                  <div x-init="timerApp()">
                     <button @click="prepniTimer" class="flex items-center">
 
                       <!-- Pokud není zapnuto provede se -->
-                      <template x-if="!zapnuto">
+                      
                         <!-- Ikona spuštění úkolu -->
                         <svg id="spust-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                         </svg>
-                      </template>
+                      
 
                       <!-- Pokud je zapnuto provede se -->
-                      <template x-if="zapnuto">
+                      
                         <!-- Ikona Stop -->
                         <svg class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" /> 
                         </svg>
-                      </template>
+                      
                     </button>
                   </div>
                   
@@ -156,9 +156,9 @@
                                   x-transition:leave="ease-in duration-200"
                                   x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                   x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                  class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                                  class="relative w-full py-6 bg-white px-7 sm:w-3/4 md:w-2/3 lg:w-1/2 sm:rounded-lg">
                                   <div class="flex items-center justify-between pb-2">
-                                      <h3 class="text-lg font-semibold">Editace úkolu</h3>
+                                      <h3 class="text-lg text-center font-semibold">Editace úkolu</h3>
                                       <button @click="modalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
                                           <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>  
                                       </button>
@@ -167,47 +167,47 @@
                                   <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-4/5 text-center mx-auto text-ctprim">   
                                     <h1 class="text-xl font-bold mb-4">Upravit úkol</h1>
                                     
-                                    <form action="{{ route('ukol.update', $ukol->id) }}" method="POST" class="flex flex-col gap-4 justify-center items-center">
+                                    <form action="{{ route('ukol.update', $ukol->id) }}" method="POST" class="flex flex-col gap-4 justify-center items-center text-right">
                                         @csrf
                                         @method('PUT')
                                         
-                                        <div>
-                                        <label for="nazev">Název úkolu:</label>
-                                        <input type="text" name="nazev" id="nazev" value="{{ $ukol->nazev }}" required>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="nazev" class="font-bold">Název úkolu:</label>
+                                        <input type="text" name="nazev" id="nazev" value="{{ $ukol->nazev }}" required class="rounded-xl px-4 py-2">
                                         </div>
 
-                                        <div>
-                                        <label for="popis">Popis:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="popis" class="font-bold">Popis:</label>
                                         <textarea name="popis" id="popis" required>{{ $ukol->popis }}</textarea>
                                         </div>
 
-                                        <div>
-                                        <label for="id_projektu">Projekt:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="id_projektu" class="font-bold">Projekt:</label>
                                         <input type="text" name="id_projektu" id="id_projektu" value="{{ $ukol->id_projektu }}" required>
                                         </div>
 
-                                        <div>
-                                        <label for="celkovy_cas_ukolu">Celkový čas:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="celkovy_cas_ukolu" class="font-bold">Celkový čas:</label>
                                         <input type="number" name="celkovy_cas_ukolu" id="celkovy_cas_ukolu" value="{{ $ukol->celkovy_cas_ukolu }}" required>
                                         </div>
 
-                                        <div>
-                                        <label for="datum_zahajeni">Datum zahájení:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="datum_zahajeni" class="font-bold">Datum zahájení:</label>
                                         <input type="date" name="datum_zahajeni" id="datum_zahajeni" value="{{ $ukol->datum_zahajeni }}" required>
                                         </div>
 
-                                        <div>
-                                        <label for="planovany_datum_ukonceni">Plánovaný datum ukončení:</label>
+                                        <div  class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="planovany_datum_ukonceni" class="font-bold">Plánovaný datum ukončení:</label>
                                         <input type="date" name="planovany_datum_ukonceni" id="planovany_datum_ukonceni" value="{{ $ukol->planovany_datum_ukonceni }}" required>
                                         </div>
 
-                                        <div>
-                                        <label for="stav">Stav:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="stav" class="font-bold">Stav:</label>
                                         <input type="text" name="stav" id="stav" value="{{ $ukol->stav }}" required>
                                         </div>
 
-                                        <div>
-                                        <label for="rozpocet">Rozpočet:</label>
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="rozpocet" class="font-bold">Rozpočet:</label>
                                         <input type="number" name="rozpocet" id="rozpocet" value="{{ $ukol->rozpocet }}" required>
                                         </div>
 
