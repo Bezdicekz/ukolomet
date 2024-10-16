@@ -26,5 +26,9 @@ class Ukoly extends Model
         'rozpocet',
     ];
 
-    
+    // Definování vztahu, že více úkolů má stejný projekt
+    public function projekt()
+    {
+        return $this->belongsTo(Projekty::class, 'id_projektu');
+    }
 }

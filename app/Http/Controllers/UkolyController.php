@@ -5,38 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ukoly;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Projekty;
 
 class UkolyController extends Controller
 {
     //
     public function show() 
     {
-        return view('ukol');
+        // Načtení projektů přihlášeného uživatele
+        $projekty = Projekty::where('uzivatel_id', Auth::id())->pluck('nazev', 'id');
+
+        // Předání projektů do view
+        return view('ukol', compact('projekty'));
+        
     }
 
     public function store(Request $request)
     {
-        // Validace dat
-        $validatedData = $request->validate([
-            'nazev' => 'required|string|max:255',
-            'popis' => 'required|string',
-            'id_projektu' => 'required|integer',
-            'id_nadrazeneho_ukolu' => 'nullable|integer',
-            'celkovy_cas_ukolu' => 'required|integer',
-            'datum_zahajeni' => 'required|date',
-            'planovany_datum_ukonceni' => 'required|date',
-            'datum_ukonceni' => 'nullable|date',
-            'stav' => 'required|string',
-            'rozpocet' => 'required|numeric',
-        ]);
+    // Validace dat
+    $validatedData = $request->validate([
+        'nazev' => 'required|string|max:255',
+        'popis' => 'required|string',
+        'id_projektu' => 'required|exists:projekty,id',
+        'id_nadrazeneho_ukolu' => 'nullable|integer',
+        'celkovy_cas_ukolu' => 'required|integer',
+        'datum_zahajeni' => 'required|date',
+        'planovany_datum_ukonceni' => 'required|date',
+        'datum_ukonceni' => 'nullable|date',
+        'stav' => 'required|string',
+        'rozpocet' => 'required|numeric',
+    ]);
 
-        // Přidání id přihlášeného uživatele
-        $validatedData['id_uzivatele'] = Auth::id();
+    // Přidání id přihlášeného uživatele
+    $validatedData['id_uzivatele'] = Auth::id();
 
-        // Vytvoření nového záznamu
-        Ukoly::create($validatedData);
+    // Vytvoření nového záznamu
+    Ukoly::create($validatedData);
 
-        return redirect()->back()->with('success', 'Úkol byl úspěšně vytvořen.');
+    // Přesměrování s úspěšnou zprávou
+    return redirect()->back()->with('success', 'Úkol byl úspěšně vytvořen.');
     }
 
         // Zobrazení formuláře pro editaci úkolu
@@ -75,4 +82,6 @@ class UkolyController extends Controller
             // Přesměrování zpět s úspěšnou zprávou
             return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně aktualizován.');
         }
+
+
 }

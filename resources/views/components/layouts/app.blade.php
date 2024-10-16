@@ -1,3 +1,4 @@
+
 <body class="bg-cb1 font-sans">
     <div class="w-full mx-auto md:w-4/5 lg:2/3">
         <header class="flex gap-4 py-2 items-center justify-between px-4 pb-12">
@@ -10,6 +11,8 @@
                         <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukol">Nový úkol</a>
                         <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./reporty">Reporty</a>
                     </nav>
+
+                    <h2 id="nav-timer" x-show="zapnuto" x-text="formattedTime" class="flex items-center justify-center px-2 rounded-md text-xs font-bold bg-red-500 text-cb3 hidden"></h2>
 
                     <div class="lg:flex hidden gap-4 text-xl">
                         <a class="relative py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./dashboard" title="Dashboard">

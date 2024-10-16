@@ -18,18 +18,18 @@ class DashboardController extends Controller
         // Nejprve se zeptám na data modelu
         $ukoly = Ukoly::where('id_uzivatele', Auth::id())
         ->where('stav', '!=', 'dokonceny')
-        ->get();
+        ->paginate(10);
 
         // Načtu úkoly, které patří přihlášenému uživateli, mají datum ukončení dnes a nejsou dokončené
         $dnesniukoly = Ukoly::where('id_uzivatele', Auth::id())
         ->whereDate('planovany_datum_ukonceni', $dnesniDatum)
         ->where('stav', '!=', 'dokonceny')
-        ->get();
+        ->paginate(10);
 
         // Načtu úkoly, které patří přihlášenému uživateli a jsou dokončené
         $dokonceneukoly = Ukoly::where('id_uzivatele', Auth::id())
         ->where('stav', 'dokonceny')
-        ->get();
+        ->paginate(10);
 
         
         // Předám všechny sady dat do pohledu

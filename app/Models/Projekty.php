@@ -22,4 +22,10 @@ class Projekty extends Model
         'planovana_naklady',
         'uzivatel_id',
     ];
+
+    // Definování vztahu, že projekt může mít více úkolů
+    public function ukoly()
+    {
+        return $this->hasMany(Ukoly::class, 'id_projektu');
+    }
 }

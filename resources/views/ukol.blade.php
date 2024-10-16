@@ -28,8 +28,12 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="id_projektu" class="block text-sm font-medium text-gray-700">ID projektu</label>
-                    <input type="number" name="id_projektu" id="id_projektu" class="mt-1 block w-full p-2 border rounded-md" required>
+                    <label for="projekt">Vyberte projekt</label>
+                    <select name="id_projektu" id="projekt" class="form-select">
+                        @foreach($projekty as $id => $nazev)
+                            <option value="{{ $id }}">{{ $nazev }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-4">
