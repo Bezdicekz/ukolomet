@@ -8,11 +8,9 @@
 
                     <nav class="lg:flex hidden gap-4 text-xl ">
                         <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./projekty">Projekty</a>
-                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukol">Nový úkol</a>
+                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukoly">Úkoly</a>
                         <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./reporty">Reporty</a>
                     </nav>
-
-                    <h2 id="nav-timer" x-show="zapnuto" x-text="formattedTime" class="flex items-center justify-center px-2 rounded-md text-xs font-bold bg-red-500 text-cb3 hidden"></h2>
 
                     <div class="lg:flex hidden gap-4 text-xl">
                         <a class="relative py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./dashboard" title="Dashboard">
@@ -77,9 +75,21 @@
                             <a href="./profil">
                                 <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Profil</p>
                             </a>
-                            <a href="./login">
-                                <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Přihlášení</p>
-                            </a>
+
+                            @if (Auth::check())
+                            <!-- Uživatel je přihlášený - zobrazit ikonu pro odhlášení -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <button type="submit" class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer" title="Odhlášení"><p>{{auth()->user()->name}}</p>Odhlásit se</button>
+                                </form>
+                            @else
+                                <!-- Uživatel není přihlášený - zobrazit ikonu pro přihlášení -->
+                                <a class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer" href="./login" title="Přihlášení">Přihlášení
+                                </a>
+                            @endif
+
+
                         </div>
                     </div>
                 </header>

@@ -92,8 +92,16 @@
         <!-- Nadcházející úkoly -->    
          
         <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
-          <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
-            @foreach($ukoly as $ukol)
+          <div class="flex justify-between">
+            <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
+            <a class="mx-4 hover:text-gray-800 w-6 h-6 text-gray-300" href="./ukol" title="Nový úkol"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+            </a>
+          </div>  
+           
+        
+        @foreach($ukoly as $ukol)
 
               <!-- seznam aktuálních úkolů -->     
               <div class="flex gap-2 items-center">
@@ -254,9 +262,16 @@
         
 
         <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
-          <h2 class="text-lg font-semibold pb-6">Projekty:</h2>
+          <div class="flex justify-between">
+              <h2 class="text-lg font-semibold pb-6">Projekty:</h2>
+              <a class="mx-4 hover:text-gray-800 w-6 h-6 text-gray-300" href="./projekty" title="Nový projekt"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+              </svg>
 
+              </a>
+            </div>    
         
+             
           <!-- seznam projektů -->     
           <div class="flex gap-2 items-center">
               

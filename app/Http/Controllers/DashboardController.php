@@ -41,8 +41,6 @@ class DashboardController extends Controller
         $projekt->celkova_cena = Ukoly::celkovaCenaProjektu($projekt->id);
         }
 
-
-
         // Předám všechny sady dat do pohledu
         return view('dashboard', [
             "ukoly" => $ukoly, 
@@ -78,6 +76,27 @@ class DashboardController extends Controller
     
         // Přesměruj zpět na dashboard s potvrzující zprávou
         return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně dokončen.');
+    }
+
+
+    public function ukoly()
+    {
+        // Načtu projekty pro přihlášeného uživatele
+        $projekty = Projekty::where('uzivatel_id', Auth::id())->get();
+        
+        // Přidám úkoly k projektům
+        foreach ($projekty as $projekt) {
+            $projekt->celkovy_cas = Ukoly::celkovyCasUkoluProProjekt($projekt->id);
+            $projekt->celkova_cena = Ukoly::celkovaCenaProjektu($projekt->id);
+            $projekt->ukoly = Ukoly::where('id_projektu', $projekt->id)
+                ->where('id_uzivatele', Auth::id())
+                ->get();
+        }
+
+        // Předám projekty do pohledu
+        return view('ukoly', [
+            "projekty" => $projekty
+        ]);
     }
 
 }

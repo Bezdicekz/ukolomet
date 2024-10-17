@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function() {
     Route::put('/ukol/{id}', [UkolyController::class, 'update'])->name('ukol.update');
     Route::put('/ukol/{id}/complete', [DashboardController::class, 'complete'])->name('ukol.complete');
 
+    Route::get('/ukoly', [DashboardController::class, 'ukoly'])->name('ukoly');
+
     Route::get('projekty', [ProjektyController::class, 'index'])->name('projekty.index');
     Route::get('projekty/create', [ProjektyController::class, 'create'])->name('projekty.create');
     Route::post('projekty', [ProjektyController::class, 'store'])->name('projekty.store');
