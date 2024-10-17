@@ -26,6 +26,18 @@ class Ukoly extends Model
         'rozpocet',
     ];
 
+    // Výpočet celkového času úkolů v projektu
+    public static function celkovyCasUkoluProProjekt($projektId)
+    {
+        return self::where('id_projektu', $projektId)->sum('celkovy_cas_ukolu');
+    }
+
+    // Výpočet celkové ceny úkolů v projektu
+    public static function celkovaCenaProjektu($projektId)
+    {
+        return self::where('id_projektu', $projektId)->sum('rozpocet');
+    }
+
     // Definování vztahu, že více úkolů má stejný projekt
     public function projekt()
     {

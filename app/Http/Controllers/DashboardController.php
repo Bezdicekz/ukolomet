@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ukoly;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Ukoly;
+use App\Models\Projekty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -31,12 +32,23 @@ class DashboardController extends Controller
         ->where('stav', 'dokonceny')
         ->paginate(10);
 
-        
+        // Načtu projekty a spočítám celkový čas úkolů pro každý projekt
+        $projekty = Projekty::where('uzivatel_id', Auth::id())->get();
+            
+        // Přidám do každého projektu celkový čas úkolů
+        foreach ($projekty as $projekt) {
+        $projekt->celkovy_cas = Ukoly::celkovyCasUkoluProProjekt($projekt->id);
+        $projekt->celkova_cena = Ukoly::celkovaCenaProjektu($projekt->id);
+        }
+
+
+
         // Předám všechny sady dat do pohledu
         return view('dashboard', [
             "ukoly" => $ukoly, 
             "dnesniukoly" => $dnesniukoly,
-            "dokonceneukoly" => $dokonceneukoly
+            "dokonceneukoly" => $dokonceneukoly,
+            "projekty" => $projekty
         ]);
     }
 
