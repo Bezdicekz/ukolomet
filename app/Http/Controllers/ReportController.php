@@ -17,7 +17,7 @@ class ReportController extends Controller
         $completedTasks = Ukoly::where('stav', 'dokončený')->count();
 
         // Rozpracované úkoly
-        $inProgressTasks = Ukoly::where('stav', 'rozpracovaný')->count();
+        $inProgressTasks = Ukoly::where('stav', 'v_procesu')->count();
 
         // Výpočet procent
         $completionPercentage = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
@@ -31,7 +31,7 @@ class ReportController extends Controller
         foreach ($projects as $project) {
             $project->total_tasks = $project->ukoly->count();
             $project->completed_tasks = $project->ukoly->where('stav', 'dokončený')->count();
-            $project->in_progress_tasks = $project->ukoly->where('stav', 'rozpracovaný')->count();
+            $project->in_progress_tasks = $project->ukoly->where('stav', 'v_procesu')->count();
             $project->total_time = Ukoly::celkovyCasUkoluProProjekt($project->id);
             $project->total_budget = Ukoly::celkovaCenaProjektu($project->id);
             $project->budget_percentage = $project->planovana_naklady > 0 ? ($project->total_budget / $project->planovana_naklady) * 100 : 0;

@@ -75,7 +75,7 @@ class UkolyController extends Controller
         $ukol = Ukoly::findOrFail($id);
         
         // Získání všech projektů pro přihlášeného uživatele
-        $projekty = Projekt::where('uzivatel_id', auth()->id())->get(); // Ujisti se, že je správné jméno sloupce
+        $projekty = Projekty::where('uzivatel_id', auth()->id())->get(); 
 
         // Zobrazení šablony s daty úkolu a projekty
         return view('ukol-edit', ['ukol' => $ukol, 'projekty' => $projekty]);

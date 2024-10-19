@@ -10,9 +10,9 @@
 
 <x-layouts.app>
 
-    <main class="flex text-center ">
+    <main class="flex text-center text-ctprim">
         <div class="container flex flex-col w-auto mx-auto ">
-            <h1 class="text-2xl font-semibold mb-4">Úkoly podle projektů</h1>
+            <h1 class="text-6xl font-bold mb-12">Úkoly podle projektů</h1>
 
             @foreach ($projekty as $projekt)
                 <div class="flex flex-col bg-cb3 text-center mb-6 border p-4 rounded-md">
