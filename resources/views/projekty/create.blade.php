@@ -10,44 +10,60 @@
 
 <x-layouts.app>
 
-    <container class="p-10 flex flex-col gap-6 lg:w-2/3 bg-red-300 mx-auto justify-center items-center text-ctprim rounded-xl">
+    <container class="flex flex-col max-w-4xl mx-auto mt-10 gap-6 bg-cb3 mx-auto justify-center items-center text-ctprim rounded-xl">
         <h1 class="text-xl text-center font-bold ">Vytvořit nový projekt</h1>
-
-
-        <form class="flex flex-col gap-6 " action="{{ route('projekty.store') }}" method="POST">
+        <form class="flex flex-col gap-6" action="{{ route('projekty.store') }}" method="POST">
             @csrf
 
-            <div class="flex flex-col text-center font-bold">
-            <label for="nazev">Název projektu:</label>
-            <input type="text" name="nazev" required>
+            <div class="grid grid-cols-2 gap-2 w-full">
+                <label for="nazev" class="form-label">Název projektu</label>
+                <input type="text" class="form-control" id="nazev" name="nazev" value="{{ old('nazev') }}">
+                @error('nazev')
+                    <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+                @enderror
             </div>
 
-            <div>
-            <label for="popis">Popis:</label>
-            <textarea name="popis"></textarea>
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <label for="popis" class="form-label">Popis projektu</label>
+                <textarea class="form-control" id="popis" name="popis" rows="3">{{ old('popis') }}</textarea>
+            @error('popis')
+                <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+            @enderror
             </div>
 
-            <div>
-            <label for="datum_zahajeni">Datum zahájení:</label>
-            <input type="date" name="datum_zahajeni">
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <label for="datum_zahajeni" class="form-label">Datum zahájení</label>
+                <input type="date" class="form-control" id="datum_zahajeni" name="datum_zahajeni" value="{{ old('datum_zahajeni') }}">
+            @error('datum_zahajeni')
+                <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+            @enderror
             </div>
 
-            <div>
-            <label for="datum_ukonceni">Datum ukončení:</label>
-            <input type="date" name="datum_ukonceni">
-            </div>
-            
-            <div>
-            <label for="Mnozstvi_casu">Množství času (hh:mm:ss):</label>
-            <input type="time" name="Mnozstvi_casu">
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <label for="datum_ukonceni" class="form-label">Datum ukončení</label>
+                <input type="date" class="form-control" id="datum_ukonceni" name="datum_ukonceni" value="{{ old('datum_ukonceni') }}">
+            @error('datum_ukonceni')
+                <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+            @enderror
             </div>
 
-            <div>
-            <label for="planovana_naklady">Plánované náklady:</label>
-            <input type="number" name="planovana_naklady">
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <label for="Mnozstvi_casu" class="form-label">Množství času (v hodinách)</label>
+                <input type="number" class="form-control" id="Mnozstvi_casu" name="Mnozstvi_casu" value="{{ old('Mnozstvi_casu') }}">
+            @error('Mnozstvi_casu')
+                <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+            @enderror
             </div>
 
-            <button type="submit">Vytvořit projekt</button>
+            <div class="grid grid-cols-2 gap-4 w-full">
+                <label for="planovana_naklady" class="form-label">Plánované náklady</label>
+                <input type="number" class="form-control" id="planovana_naklady" name="planovana_naklady" value="{{ old('planovana_naklady') }}">
+            @error('planovana_naklady')
+                <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
+            @enderror
+            </div>
+
+            <button type="submit" class="p-2 bg-cbtprim text-cbttprim rounded-lg hover:bg-cbtsec hover:text-cbttsec">Vytvořit projekt</button>
         </form>
     </container>
 </x-layouts.app>

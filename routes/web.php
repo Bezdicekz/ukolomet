@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjektyController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UkolyController;
 use App\Http\Controllers\ProjektController;
+use App\Http\Controllers\ReportController;
 
 
 
@@ -43,4 +44,6 @@ Route::middleware('auth')->group(function() {
     Route::post('projekty', [ProjektyController::class, 'store'])->name('projekty.store');
     Route::get('projekty/{id}/edit', [ProjektyController::class, 'edit'])->name('projekty.edit');
     Route::put('projekty/{id}', [ProjektyController::class, 'update'])->name('projekty.update');
+
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
 }); 

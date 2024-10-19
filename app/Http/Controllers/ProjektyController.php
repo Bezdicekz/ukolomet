@@ -29,18 +29,41 @@ class ProjektyController extends Controller
 
     public function store(Request $request)
     {
-        // Vytvoření nového projektu pro přihlášeného uživatele
-        Projekty::create([
-            'nazev' => $request->nazev,
-            'popis' => $request->popis,
-            'datum_zahajeni' => $request->datum_zahajeni,
-            'datum_ukonceni' => $request->datum_ukonceni,
-            'Mnozstvi_casu' => $request->Mnozstvi_casu,
-            'planovana_naklady' => $request->planovana_naklady,
-            'uzivatel_id' => Auth::id(),
+        // Validace formuláře
+        $validated = $request->validate([
+            'nazev' => 'required|string|max:255',
+            'popis' => 'required|string',
+            'datum_zahajeni' => 'required|date',
+            'datum_ukonceni' => 'required|date|after_or_equal:datum_zahajeni',
+            'Mnozstvi_casu' => 'nullable|numeric|min:0',
+            'planovana_naklady' => 'nullable|numeric|min:0',
+        ], [
+            'nazev.required' => 'Pole název je povinné.',
+            'nazev.max' => 'Název projektu nesmí být delší než 255 znaků.',
+            'popis.required' => 'Popis projektu je povinný.',
+            'datum_zahajeni.required' => 'Datum zahájení projektu je povinné.',
+            'datum_ukonceni.required' => 'Datum ukončení projektu je povinné.',
+            'datum_ukonceni.after_or_equal' => 'Datum ukončení musí být po nebo rovno datu zahájení.',
+            'Mnozstvi_casu.numeric' => 'Množství času musí být číslo.',
+            'planovana_naklady.numeric' => 'Plánované náklady musí být číslo.',
         ]);
 
-        return redirect()->route('projekty.index');
+        // Pokud nejsou hodnoty zadány, nahradí se nulou
+        $mnozstvi_casu = $request->filled('Mnozstvi_casu') ? $request->input('Mnozstvi_casu') : 0;
+        $planovana_naklady = $request->filled('planovana_naklady') ? $request->input('planovana_naklady') : 0;
+
+        // Vytvoření nového projektu pro přihlášeného uživatele
+        Projekty::create([
+            'nazev' => $validated['nazev'],
+            'popis' => $validated['popis'],
+            'datum_zahajeni' => $validated['datum_zahajeni'],
+            'datum_ukonceni' => $validated['datum_ukonceni'],
+            'Mnozstvi_casu' => $validated['Mnozstvi_casu'],
+            'planovana_naklady' => $validated['planovana_naklady'],
+            'uzivatel_id' => auth()->id(), // přiřazení aktuálního přihlášeného uživatele
+        ]);
+
+        return redirect()->route('projekty.index')->with('success', 'Projekt byl úspěšně vytvořen.');
     }
 
     public function edit($id)
