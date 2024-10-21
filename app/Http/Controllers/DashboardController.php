@@ -78,24 +78,44 @@ class DashboardController extends Controller
         return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně dokončen.');
     }
 
+    public function nedokonceny($id)
+    {
+        // Najdi úkol
+        $ukol = Ukoly::findOrFail($id);
+    
+        // Aktualizuj stav úkolu na 'rozpracovaný'
+        $ukol->stav = 'v_procesu';
+        $ukol->save();
+    
+        // Přesměruj zpět na dashboard s potvrzující zprávou
+        return redirect()->route('dashboard')->with('success', 'Úkol byl úspěšně otevřen.');
+    }
 
     public function ukoly()
     {
         // Načtu projekty pro přihlášeného uživatele
         $projekty = Projekty::where('uzivatel_id', Auth::id())->get();
-        
+    
         // Přidám úkoly k projektům
         foreach ($projekty as $projekt) {
             $projekt->celkovy_cas = Ukoly::celkovyCasUkoluProProjekt($projekt->id);
             $projekt->celkova_cena = Ukoly::celkovaCenaProjektu($projekt->id);
+            
+            // Načítám úkoly přiřazené k projektu
             $projekt->ukoly = Ukoly::where('id_projektu', $projekt->id)
                 ->where('id_uzivatele', Auth::id())
                 ->get();
         }
-
-        // Předám projekty do pohledu
+    
+        // Načtu úkoly, které nejsou přiřazeny žádnému projektu
+        $ukolyBezProjektu = Ukoly::where('id_projektu', 0)
+            ->where('id_uzivatele', Auth::id())
+            ->get();
+    
+        // Předám projekty a úkoly bez projektu do pohledu
         return view('ukoly', [
-            "projekty" => $projekty
+            'projekty' => $projekty,
+            'ukolyBezProjektu' => $ukolyBezProjektu, // Předáme úkoly bez projektu
         ]);
     }
 

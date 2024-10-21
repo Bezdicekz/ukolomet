@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/ukol/{id}/edit', [UkolyController::class, 'edit'])->name('ukol.edit');
     Route::put('/ukol/{id}', [UkolyController::class, 'update'])->name('ukol.update');
     Route::put('/ukol/{id}/complete', [DashboardController::class, 'complete'])->name('ukol.complete');
+    Route::put('/ukol/{id}/nedokonceny', [DashboardController::class, 'nedokonceny'])->name('ukol.nedokonceny');
+
 
     Route::get('/ukoly', [DashboardController::class, 'ukoly'])->name('ukoly');
 
@@ -44,6 +46,8 @@ Route::middleware('auth')->group(function() {
     Route::post('projekty', [ProjektyController::class, 'store'])->name('projekty.store');
     Route::get('projekty/{id}/edit', [ProjektyController::class, 'edit'])->name('projekty.edit');
     Route::put('projekty/{id}', [ProjektyController::class, 'update'])->name('projekty.update');
+    Route::delete('/projekty/{id}', [ProjektyController::class, 'destroy'])->name('projekty.smazat');
+
 
     Route::get('report', [ReportController::class, 'index'])->name('report.index');
 }); 

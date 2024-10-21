@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Projekty;
+use App\Models\Ukoly;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,4 +92,25 @@ class ProjektyController extends Controller
 
         return redirect()->route('projekty.index');
     }
+
+    public function destroy(Request $request, $id)
+{
+    $projekt = Projekty::findOrFail($id);
+
+    // Zpracování vybrané možnosti
+    if ($request->input('delete_option') === 'smazat_ukoly') {
+        // Smažeme projekt i úkoly
+        Ukoly::where('id_projektu', $projekt->id)->delete();
+        $projekt->delete();
+        return redirect()->route('projekty.index')->with('success', 'Projekt i úkoly byly úspěšně smazány.');
+    } else if ($request->input('delete_option') === 'presunout_ukoly') {
+        $novy_projekt_id = $request->input('novy_projekt');
+        // Přesuneme úkoly do nového projektu
+        Ukoly::where('id_projektu', $projekt->id)->update(['id_projektu' => $novy_projekt_id]);
+        $projekt->delete();
+        return redirect()->route('projekty.index')->with('success', 'Projekt byl smazán a úkoly byly přesunuty.');
+    }
+
+    return redirect()->route('projekty.index')->with('error', 'Nastala chyba při odstraňování projektu.');
+}
 }

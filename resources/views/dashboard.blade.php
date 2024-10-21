@@ -132,7 +132,11 @@
 
                                         <div class="grid grid-cols-2 gap-4 w-full">
                                         <label for="stav" class="font-bold rounded-xl px-4 py-2">Stav:</label>
-                                        <input type="text" name="stav" id="stav" value="{{ $dnesniukol->stav }}" class="rounded-xl px-4 py-2" required>
+                                        <select name="stav" id="stav" class="rounded-xl px-4 py-2" required>
+                                            <option value="novy" {{ $dnesniukol->stav == 'novy' ? 'selected' : '' }}>Nový úkol</option>
+                                            <option value="dokonceny" {{ $dnesniukol->stav == 'dokonceny' ? 'selected' : '' }}>Dokončený úkol</option>
+                                            <option value="v_procesu" {{ $dnesniukol->stav == 'v_procesu' ? 'selected' : '' }}>Rozpracovaný úkol</option>
+                                        </select>
                                         </div>
 
                                         <div class="grid grid-cols-2 gap-4 w-full">
@@ -210,30 +214,9 @@
                   <!-- Uběhnutý čas úkolu -->
                   <p id="cas-ukolu" x-text="finalTime" class="hover:text-gray-800 text-gray-300 text-left">Práce na úkolu {{$ukol->celkovy_cas_ukolu}} hodin</p>
                 </div>
+
                 <div class="flex gap-2 items-center ml-auto pr-2"> 
 
-                  <!-- Aplikuj timer po kliknutí na play -->
-                  <div x-init="timerApp()">
-                    <button @click="prepniTimer" class="flex items-center">
-
-                                <!-- Pokud není zapnuto provede se -->
-                                <template x-if="!zapnuto">
-                                  <!-- Ikona spuštění úkolu -->
-                                  <svg id="spust-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                                  </svg>
-                                </template>
-
-                                <!-- Pokud je zapnuto provede se -->
-                                <template x-if="zapnuto">
-                                  <!-- Ikona Stop -->
-                                  <svg class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z" /> 
-                                  </svg>
-                                </template>
-                    </button>
-                  </div>
-                  
                   <!-- Ikona edituj úkol -->
                   <!-- Připravné modální okno -->
                   <div x-data="{ modalOpen: false }"
@@ -313,7 +296,11 @@
 
                                         <div class="grid grid-cols-2 gap-4 w-full">
                                         <label for="stav" class="font-bold rounded-xl px-4 py-2">Stav:</label>
-                                        <input type="text" name="stav" id="stav" value="{{ $ukol->stav }}" class="rounded-xl px-4 py-2" required>
+                                        <select name="stav" id="stav" class="rounded-xl px-4 py-2" required>
+                                            <option value="novy" {{ $ukol->stav == 'novy' ? 'selected' : '' }}>Nový úkol</option>
+                                            <option value="dokonceny" {{ $ukol->stav == 'dokonceny' ? 'selected' : '' }}>Dokončený úkol</option>
+                                            <option value="v_procesu" {{ $ukol->stav == 'v_procesu' ? 'selected' : '' }}>Rozpracovaný úkol</option>
+                                        </select>
                                         </div>
 
                                         <div class="grid grid-cols-2 gap-4 w-full">
@@ -486,10 +473,94 @@
 
                   </div>
                   
-                  <!-- Ikona smaž projekt -->
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:text-gray-800 w-6 h-6 text-gray-300">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                  </svg>
+                    <!-- Ikona smaž projekt -->
+                    <div x-data="{ modalOpen: false }"
+                      @keydown.escape.window="modalOpen = false"
+                      class="relative z-50 w-auto h-auto">
+                      <button @click="modalOpen=true" class="inline-flex items-center justify-center"><svg id="edituj-projekt" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                  </svg></button>
+                  <template x-teleport="body">
+                      <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                          <div x-show="modalOpen" 
+                              x-transition:enter="ease-out duration-300"
+                              x-transition:enter-start="opacity-0"
+                              x-transition:enter-end="opacity-100"
+                              x-transition:leave="ease-in duration-300"
+                              x-transition:leave-start="opacity-100"
+                              x-transition:leave-end="opacity-0"
+                              @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                          <div x-show="modalOpen"
+                              x-trap.inert.noscroll="modalOpen"
+                              x-transition:enter="ease-out duration-300"
+                              x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                              x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                              x-transition:leave="ease-in duration-200"
+                              x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                              x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                              class="relative w-full py-6 bg-white px-7 sm:w-3/4 md:w-2/3 lg:w-1/2 sm:rounded-lg">
+                              <div class="flex items-center justify-between pb-2">
+                                  <h3 class="text-lg text-center font-semibold">Editace projektu</h3>
+                                  <button @click="modalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>  
+                                  </button>
+                              </div>
+                              <div class="relative w-auto">
+                                  <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-4/5 text-center mx-auto text-ctprim">   
+                                      <h1 class="text-xl font-bold mb-4">Upravit projekt</h1>
+
+                                      <!-- Formulář pro smazání projektu -->
+                                      <div class="flex flex-col bg-white p-6 rounded-md shadow-md">
+                                          <h2 class="text-2xl font-bold mb-4">Smazání projektu</h2>
+                                          <form action="{{ route('projekty.smazat', $projekt->id) }}" method="POST">
+                                          @csrf
+                                          @method('DELETE')
+
+                                          <div class="mb-4">
+                                              <label for="delete_option" class="font-bold">Vyberte možnost:</label>
+                                              <select name="delete_option" id="delete_option" class="rounded-xl px-4 py-2" required onchange="toggleProjectSelect(this)">
+                                                  <option value="smazat_ukoly">Smazat projekt i s úkoly</option>
+                                                  <option value="presunout_ukoly">Přesunout úkoly do jiného projektu</option>
+                                              </select>
+                                          </div>
+
+                                          <div class="mb-4 hidden" id="novy_projekt_container">
+                                              <label for="novy_projekt" class="font-bold">Vyberte projekt:</label>
+                                              <select name="novy_projekt" id="novy_projekt" class="rounded-xl px-4 py-2">
+                                                  <option value="" disabled selected>-- Vyberte projekt --</option>
+                                                  @foreach ($projekty as $other_project)
+                                                      <option value="{{ $other_project->id }}">{{ $other_project->nazev }}</option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+
+                                          <button type="submit" class="mt-4 bg-red-500 text-white rounded-xl px-4 py-2">Smazat projekt</button>
+                                      </form>
+
+                                      <script>
+                                          function toggleProjectSelect(selectElement) {
+                                              const novyProjektContainer = document.getElementById('novy_projekt_container');
+                                              
+                                              if (selectElement.value === 'presunout_ukoly') {
+                                                  novyProjektContainer.classList.remove('hidden'); // Zobrazit pole a název
+                                              } else {
+                                                  novyProjektContainer.classList.add('hidden'); // Skrýt pole i název
+                                              }
+                                          }
+                                      </script>
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </template>
+
+                  </div>
+
+
+
+
                 </div>
               </div>
             @endforeach
@@ -504,11 +575,16 @@
               @foreach ($dokonceneukoly as $dokoncenyukol)
               <div class="flex gap-2">
               <div class="flex gap-2 text-left">
-                  <!-- Ikona spuštění úkol je hotový -->
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800">
+                    <!-- Ikona spuštění úkol je hotový -->
+                    <form action="{{ route('ukol.nedokonceny', $dokoncenyukol->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-800">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  
+                  </svg></button>
+                </form>
+
+                 
                       <p>{{$dokoncenyukol->nazev}}</p>
 
                     <!-- Skryté pole pro ID -->
@@ -516,19 +592,119 @@
               </div>
 
               <div class="flex gap-2 items-center ml-auto pr-2">
-                <!-- Ikona spuštění úkolu -->
-                <svg id="spust-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                </svg>
                 
-                <!-- Ikona edituj úkol -->
-                <svg id="edituj-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                </svg>
+                  <!-- Ikona edituj úkol -->
+                  <!-- Připravné modální okno -->
+                  <div x-data="{ modalOpen: false }"
+                      @keydown.escape.window="modalOpen = false"
+                      class="relative z-50 w-auto h-auto">
+                      <button @click="modalOpen=true" class="inline-flex items-center justify-center"><svg id="edituj-ukol" class="hover:text-gray-800 w-6 h-6 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                  </svg></button>
+                      <template x-teleport="body">
+                          <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                              <div x-show="modalOpen" 
+                                  x-transition:enter="ease-out duration-300"
+                                  x-transition:enter-start="opacity-0"
+                                  x-transition:enter-end="opacity-100"
+                                  x-transition:leave="ease-in duration-300"
+                                  x-transition:leave-start="opacity-100"
+                                  x-transition:leave-end="opacity-0"
+                                  @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                              <div x-show="modalOpen"
+                                  x-trap.inert.noscroll="modalOpen"
+                                  x-transition:enter="ease-out duration-300"
+                                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                  x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                  x-transition:leave="ease-in duration-200"
+                                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                  class="relative w-full py-6 bg-white px-7 sm:w-3/4 md:w-2/3 lg:w-1/2 sm:rounded-lg">
+                                  <div class="flex items-center justify-between pb-2">
+                                      <h3 class="text-lg text-center font-semibold">Editace úkolu</h3>
+                                      <button @click="modalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>  
+                                      </button>
+                                  </div>
+                                  <div class="relative w-auto">
+                                  <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-4/5 text-center mx-auto text-ctprim">   
+                                    <h1 class="text-xl font-bold mb-4">Upravit úkol</h1>
+                                    
+                                    <form action="{{ route('ukol.update', $ukol->id) }}" method="POST" class="flex flex-col gap-4 justify-center items-center text-right">
+                                        @csrf
+                                        @method('PUT')
+                                        
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="nazev" class="font-bold rounded-xl px-4 py-2">Název úkolu:</label>
+                                        <input type="text" name="nazev" id="nazev" value="{{ $dokoncenyukol->nazev }}" required class="rounded-xl px-4 py-2">
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="popis" class="font-bold rounded-xl px-4 py-2">Popis:</label>
+                                        <textarea name="popis" id="popis" required class="rounded-xl px-4 py-2">{{ $dokoncenyukol->popis }}</textarea>
+                                        </div>
+
+                                            <div class="grid grid-cols-2 gap-4 w-full">
+                                                <label for="id_projektu" class="font-bold rounded-xl px-4 py-2">Projekt:</label>
+                                                <select name="id_projektu" id="id_projektu" class="rounded-xl px-4 py-2" required>
+                                                    @foreach($projekty as $projekt)
+                                                        <option value="{{ $projekt->id }}" {{ $projekt->id == old('id_projektu', $dokoncenyukol->id_projektu) ? 'selected' : '' }}>
+                                                            {{ $projekt->nazev }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="celkovy_cas_ukolu" class="font-bold rounded-xl px-4 py-2">Celkový čas:</label>
+                                        <input type="number" name="celkovy_cas_ukolu" id="celkovy_cas_ukolu" value="{{ $dokoncenyukol->celkovy_cas_ukolu }}" class="rounded-xl px-4 py-2" required>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="datum_zahajeni" class="font-bold rounded-xl px-4 py-2">Datum zahájení:</label>
+                                        <input type="date" name="datum_zahajeni" id="datum_zahajeni" value="{{ $dokoncenyukol->datum_zahajeni }}" class="rounded-xl px-4 py-2" required>
+                                        </div>
+
+                                        <div  class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="planovany_datum_ukonceni" class="font-bold rounded-xl px-4 py-2">Plánovaný datum ukončení:</label>
+                                        <input type="date" name="planovany_datum_ukonceni" id="planovany_datum_ukonceni" value="{{ $dokoncenyukol->planovany_datum_ukonceni }}" class="rounded-xl px-4 py-2" required>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="stav" class="font-bold rounded-xl px-4 py-2">Stav:</label>
+                                        <select name="stav" id="stav" class="rounded-xl px-4 py-2" required>
+                                            <option value="novy" {{ $dokoncenyukol->stav == 'novy' ? 'selected' : '' }}>Nový úkol</option>
+                                            <option value="dokonceny" {{ $dokoncenyukol->stav == 'dokonceny' ? 'selected' : '' }}>Dokončený úkol</option>
+                                            <option value="v_procesu" {{ $dokoncenyukol->stav == 'v_procesu' ? 'selected' : '' }}>Rozpracovaný úkol</option>
+                                        </select>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4 w-full">
+                                        <label for="rozpocet" class="font-bold rounded-xl px-4 py-2">Rozpočet:</label>
+                                        <input type="number" name="rozpocet" id="rozpocet" value="{{ $dokoncenyukol->rozpocet }}" class="rounded-xl px-4 py-2" required>
+                                        </div>
+
+                                        <button type="submit" class="py-2 px-6 transition duration-700 ease-in-out rounded-md hover:text-white hover:bg-cbtsec">Uložit změny</button>
+                                    </form>
+
+                                    </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </template>
+                  </div>
     
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:text-gray-800 w-6 h-6 text-gray-300">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                  </svg>
+                  <!-- Ikona smaž úkol -->
+                  <form action="{{ route('ukol.destroy', $dokoncenyukol->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn-delete">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:text-gray-800 w-6 h-6 text-gray-300"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                          </svg>
+                        </button>
+                  </form>
+
               </div> 
               </div> 
               @endforeach

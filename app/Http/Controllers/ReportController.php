@@ -22,19 +22,27 @@ class ReportController extends Controller
         // Výpočet procent
         $completionPercentage = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
 
-        // Projekty s jejich úkoly
+        $projects = Projekty::select('id', 'nazev', 'mnozstvi_casu', 'planovana_naklady')
+        ->with(['ukoly' => function($query) {
+        $query->select('id_projektu', 'stav', 'celkovy_cas_ukolu', 'rozpocet');
+        }])->get();
+
+ /*       // Projekty s jejich úkoly
         $projects = Projekty::with(['ukoly' => function($query) {
             $query->select('id_projektu', 'stav', 'celkovy_cas_ukolu', 'rozpocet');
         }])->get();
-
+*/
         // Sestavení dat pro projekty
         foreach ($projects as $project) {
             $project->total_tasks = $project->ukoly->count();
-            $project->completed_tasks = $project->ukoly->where('stav', 'dokončený')->count();
+            $project->completed_tasks = $project->ukoly->where('stav', 'dokonceny')->count();
             $project->in_progress_tasks = $project->ukoly->where('stav', 'v_procesu')->count();
             $project->total_time = Ukoly::celkovyCasUkoluProProjekt($project->id);
             $project->total_budget = Ukoly::celkovaCenaProjektu($project->id);
             $project->budget_percentage = $project->planovana_naklady > 0 ? ($project->total_budget / $project->planovana_naklady) * 100 : 0;
+            $project->mnozstvi_casu = $project->mnozstvi_casu;
+            $project->planovane_naklady = $project->planovane_naklady;
+
         }
 
         return view('report', compact('totalTasks', 'completedTasks', 'inProgressTasks', 'completionPercentage', 'projects'));
