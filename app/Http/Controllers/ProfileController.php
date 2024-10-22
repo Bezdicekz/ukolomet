@@ -20,7 +20,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:8|confirmed',
-            'hodinova-sazba' => 'required|integer|min:0',
+            'hodinova_sazba' => 'required|integer|min:0',
         ]);
 
         $user = Auth::user();
@@ -29,7 +29,7 @@ class ProfileController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
-        $user->{'hodinova-sazba'} = $request->input('hodinova-sazba');
+        $user->{'hodinova_sazba'} = $request->input('hodinova_sazba');
         $user->save();
 
         return redirect()->route('profile.edit')->with('status', 'Profil byl úspěšně aktualizován.');
