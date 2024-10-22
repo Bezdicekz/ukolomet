@@ -12,13 +12,12 @@ class ProjektyFactory extends Factory
     public function definition()
     {
         return [
-            'nazev' => $this->faker->sentence(3),
-            'popis' => $this->faker->paragraph,
+            'nazev' => $this->faker->sentence(),
+            'popis' => $this->faker->paragraph(),
             'datum_zahajeni' => $this->faker->date(),
-            'datum_ukonceni' => $this->faker->date(),
-            'Mnozstvi_casu' => $this->faker->randomFloat(2, 1, 100), 
-            'planovana_naklady' => $this->faker->randomFloat(2, 1000, 10000), 
-            'uzivatel_id' => null, 
+            'datum_ukonceni' => $this->faker->optional()->date(),
+            'Mnozstvi_casu' => $this->faker->numberBetween(10, 500),
+            'planovane_naklady' => $this->faker->numberBetween(1000, 100000),
         ];
     }
 }

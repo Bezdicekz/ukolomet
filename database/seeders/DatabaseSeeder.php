@@ -6,32 +6,33 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Projekty;
 use App\Models\Ukoly;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
+
+    
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        // Vytvoření 5 uživatelů
-        $users = User::factory(5)->create();
 
-        foreach ($users as $user) {
-            // Vytvoření 5 projektů pro každého uživatele
-            $projekty = Projekty::factory(5)->create([
+        $faker = Faker::create('cs_CZ');
+        // Vytvoříme 5 uživatelů
+        User::factory(5)->create()->each(function ($user) {
+            // Každému uživateli vytvoříme 5 projektů
+            Projekty::factory(5)->create([
                 'uzivatel_id' => $user->id,
-            ]);
-
-            foreach ($projekty as $projekt) {
-                // Vytvoření 5 úkolů pro každý projekt
-                Ukoly::factory(5)->create([
+            ])->each(function ($projekt) {
+                // Každému projektu vytvoříme 10 úkolů
+                Ukoly::factory(10)->create([
                     'id_projektu' => $projekt->id,
-                    'id_uzivatele' => $user->id, // Pokud chcete mít přiřazení úkolů i k uživateli
+                    'id_uzivatele' => $projekt->uzivatel_id,
                 ]);
-            }
-        }
+            });
+        });
     }
 }

@@ -11,18 +11,20 @@ class UkolyFactory extends Factory
 
     public function definition()
     {
+        // Možnosti pro stav úkolu
+        $statuses = ['novy', 'v_procesu', 'dokonceny'];
+
         return [
-            'nazev' => $this->faker->sentence(2),
-            'popis' => $this->faker->paragraph,
-            'id_uzivatele' => null, // Toto se nastaví v seederu
-            'id_projektu' => null, // Toto se nastaví v seederu
-            'id_nadrazeneho_ukolu' => null,
-            'celkovy_cas_ukolu' => $this->faker->randomFloat(2, 1, 10), // např. 1 až 10
+            'nazev' => $this->faker->sentence(),
+            'popis' => $this->faker->paragraph(),
+            'id_uzivatele' => \App\Models\User::factory(),
+            'id_projektu' => \App\Models\Projekty::factory(),
+            'celkovy_cas_ukolu' => $this->faker->numberBetween(1, 100),
             'datum_zahajeni' => $this->faker->date(),
             'planovany_datum_ukonceni' => $this->faker->date(),
-            'datum_ukonceni' => null,
-            'stav' => $this->faker->randomElement(['plánováno', 'probíhá', 'dokončeno']),
-            'rozpocet' => $this->faker->randomFloat(2, 100, 1000), // např. 100 až 1000
+            'datum_ukonceni' => $this->faker->optional()->date(),
+            'stav' => $statuses[array_rand($statuses)],
+            'rozpocet' => $this->faker->numberBetween(100, 1000),
         ];
     }
 }

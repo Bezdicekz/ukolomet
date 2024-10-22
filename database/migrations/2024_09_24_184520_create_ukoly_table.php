@@ -16,7 +16,7 @@ class CreateUkolyTable extends Migration
         Schema::create('ukoly', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nazev', 255)->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
-            $table->string('popis', 255)->nullable()->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
+            $table->text('popis')->nullable()->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->unsignedBigInteger('id_uzivatele');
             $table->integer('id_projektu')->nullable();
             $table->integer('id_nadrazeneho_ukolu')->nullable();

@@ -2,20 +2,25 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-    protected $model = User::class;
-
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
     public function definition()
     {
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'password' => bcrypt('password'), // heslo
-            'hodinova-sazba' => $this->faker->randomFloat(2, 50, 200), // například 50 až 200
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'), // Default heslo
+            'hodinova_sazba' => $this->faker->numberBetween(100, 1000),
+            'remember_token' => Str::random(10),
         ];
     }
 }

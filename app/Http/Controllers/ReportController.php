@@ -5,27 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Projekty;
 use App\Models\Ukoly;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
     public function index()
     {
+
+        // Získání aktuálně přihlášeného uživatele
+        $user = Auth::user();
+
         // Celkový počet úkolů
-        $totalTasks = Ukoly::count();
+        $totalTasks = Ukoly::where('id_uzivatele', $user->id)->count();
 
         // Dokončené úkoly
-        $completedTasks = Ukoly::where('stav', 'dokončený')->count();
+        $completedTasks = Ukoly::where('id_uzivatele', $user->id)->where('stav', 'dokončený')->count();
 
         // Rozpracované úkoly
-        $inProgressTasks = Ukoly::where('stav', 'v_procesu')->count();
+        $inProgressTasks = Ukoly::where('id_uzivatele', $user->id)->where('stav', 'v_procesu')->count();
 
         // Výpočet procent
         $completionPercentage = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
 
-        $projects = Projekty::select('id', 'nazev', 'mnozstvi_casu', 'planovane_naklady')
-        ->with(['ukoly' => function($query) {
-        $query->select('id_projektu', 'stav', 'celkovy_cas_ukolu', 'rozpocet');
-        }])->get();
+        $projects = Projekty::where('uzivatel_id', $user->id)
+            ->select('id', 'nazev', 'mnozstvi_casu', 'planovane_naklady')
+            ->with(['ukoly' => function($query) use ($user) {
+                $query->select('id_projektu', 'stav', 'celkovy_cas_ukolu', 'rozpocet')
+                      ->where('id_uzivatele', $user->id);
+            }])
+            ->get();
 
  /*       // Projekty s jejich úkoly
         $projects = Projekty::with(['ukoly' => function($query) {
