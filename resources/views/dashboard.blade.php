@@ -10,9 +10,9 @@
 
 <x-layouts.app>
 
-    <main class="mt-6 md:grid md:grid-cols-2 lg:flex mx-4 gap-4 lg:h-[85vh]">
+    <main class="mt-6 md:grid md:grid-cols-2 2xl:flex mx-4 gap-4 2xl:h-[85vh]">
 
-        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
+        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 2xl:w-1/4">
           <!-- Horní část kalendáře: měsíc a tlačítka -->
           <div class="flex justify-between items-center mb-2">
             <h2 id="kalendar-mesic-rok" class="text-lg font-semibold">Září 2024</h2>
@@ -184,7 +184,7 @@
 
         <!-- Nadcházející úkoly -->    
          
-        <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
+        <div class="bg-cb3  mb-4 rounded-lg shadow-lg p-4 2xl:w-1/4">
           <div class="flex justify-between">
             <h2 class="text-lg font-semibold pb-6">Nadcházející úkoly:</h2>
             <a class="mx-4 hover:text-gray-800 w-6 h-6 text-gray-300" href="./ukol" title="Nový úkol"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -343,7 +343,7 @@
 
         
 
-        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
+        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 2xl:w-1/4">
           <div class="flex justify-between">
               <h2 class="text-lg font-semibold pb-6">Projekty:</h2>
               <a class="mx-4 hover:text-gray-800 w-6 h-6 text-gray-300" href="./projekty/create" title="Nový projekt"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -567,7 +567,7 @@
             @endforeach
           </div>
         </div>
-        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
+        <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 2xl:w-1/4">
           <h2 class="text-lg font-semibold pb-6">Dokončené úkoly:</h2>
 
             <!-- seznam dokončených úkolů -->     
