@@ -52,7 +52,8 @@
 
                         <label class="font-bold text-sm mt-4" for="password1">Heslo</label>
                         <input class="text-center rounded-lg border border-ctsec py-2 mb-2 text-xs" id="password1" type="password" name="password1" placeholder="Napiš své heslo" required>
-                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password2" type="password" name="password2" placeholder="Potvrď své heslo" required>
+                        <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password2" type="password" name="password1_confirmation" placeholder="Potvrď své heslo" required>
+
 
                         <!-- validace pro pole heslo -->
                         @error('password1')

@@ -38,8 +38,13 @@
                         @csrf
                         <label class="font-bold" for="email">Email</label>
                         <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="email" type="email" name="email" placeholder="Napiš svůj email" required>
+
                         <label class="font-bold" for="password">Heslo</label>
                         <input class="text-center rounded-lg border border-ctsec py-2 text-xs" id="password" type="password" name="password" placeholder="Napiš své heslo" required>
+                        @error('email')
+                            <div class="invalid-feedback text-center text-xs font-bold text-red-600">{{ $message }}</div>
+                        @enderror
+
 
                         <div class="flex flex-col gap-6 py-6 justify-center text-xs">
                             <label>

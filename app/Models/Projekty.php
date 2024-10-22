@@ -19,8 +19,9 @@ class Projekty extends Model
         'datum_zahajeni',
         'datum_ukonceni',
         'Mnozstvi_casu',
-        'planovana_naklady',
+        'planovane_naklady',
         'uzivatel_id',
+        'rozpocet',
     ];
 
     // Definování vztahu, že projekt může mít více úkolů

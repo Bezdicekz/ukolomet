@@ -22,7 +22,7 @@ class ReportController extends Controller
         // Výpočet procent
         $completionPercentage = $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0;
 
-        $projects = Projekty::select('id', 'nazev', 'mnozstvi_casu', 'planovana_naklady')
+        $projects = Projekty::select('id', 'nazev', 'mnozstvi_casu', 'planovane_naklady')
         ->with(['ukoly' => function($query) {
         $query->select('id_projektu', 'stav', 'celkovy_cas_ukolu', 'rozpocet');
         }])->get();
@@ -39,7 +39,7 @@ class ReportController extends Controller
             $project->in_progress_tasks = $project->ukoly->where('stav', 'v_procesu')->count();
             $project->total_time = Ukoly::celkovyCasUkoluProProjekt($project->id);
             $project->total_budget = Ukoly::celkovaCenaProjektu($project->id);
-            $project->budget_percentage = $project->planovana_naklady > 0 ? ($project->total_budget / $project->planovana_naklady) * 100 : 0;
+            $project->budget_percentage = $project->planovane_naklady > 0 ? ($project->total_budget / $project->planovane_naklady) * 100 : 0;
             $project->mnozstvi_casu = $project->mnozstvi_casu;
             $project->planovane_naklady = $project->planovane_naklady;
 

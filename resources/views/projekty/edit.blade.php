@@ -55,8 +55,8 @@
         </div>
 
         <div class="mb-4">
-            <label for="planovana_naklady" class="block text-sm font-medium text-gray-700">Plánované náklady</label>
-            <input type="number" id="planovana_naklady" name="planovana_naklady" value="{{ old('planovana_naklady', $projekt->planovana_naklady) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            <label for="planovane_naklady" class="block text-sm font-medium text-gray-700">Plánované náklady</label>
+            <input type="number" id="planovane_naklady" name="planovane_naklady" value="{{ old('planovane_naklady', $projekt->planovane_naklady) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
         </div>
 
         <!-- Tlačítko pro aktualizaci -->

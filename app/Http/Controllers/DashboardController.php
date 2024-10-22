@@ -34,6 +34,9 @@ class DashboardController extends Controller
 
         // Načtu projekty a spočítám celkový čas úkolů pro každý projekt
         $projekty = Projekty::where('uzivatel_id', Auth::id())->get();
+        
+        // Proměnná, která určuje, zda má uživatel projekty
+        $hasProjects = $projekty->isNotEmpty();
             
         // Přidám do každého projektu celkový čas úkolů
         foreach ($projekty as $projekt) {
@@ -43,6 +46,7 @@ class DashboardController extends Controller
 
         // Předám všechny sady dat do pohledu
         return view('dashboard', [
+            'hasProjects' => $hasProjects,
             "ukoly" => $ukoly, 
             "dnesniukoly" => $dnesniukoly,
             "dokonceneukoly" => $dokonceneukoly,

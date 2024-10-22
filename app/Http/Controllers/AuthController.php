@@ -24,6 +24,10 @@ class AuthController extends Controller {
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required'],
+            ],
+            [
+                'email.required' => "Jméno musí být zadáno",
+                'password.required' => "Heslo musí být zadáno",
             ]);
     
             // Použití Auth::attempt pro ověření uživatele
@@ -52,12 +56,13 @@ class AuthController extends Controller {
             $validated = $registrace->validate([
                 'jmeno' => 'required|min:3',
                 'email' => 'required|unique:users,email', // validuje email jestli existuje v databázi.
-                'password1' => 'required',
+                'password1' => 'required|confirmed',
             ],
             [
                 'jmeno.required' => "Uživatel musí mít jméno!", // Vlastní chybová hláška
                 'jmeno.min' => "Jméno musí být alespoň 3 znaky dlouhé!",
                 'email.unique' => "Email již existuje",
+                'password1.confirmed' => "Hesla se neshodují.",
             ]);
 
 

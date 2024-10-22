@@ -37,7 +37,7 @@ class ProjektyController extends Controller
             'datum_zahajeni' => 'required|date',
             'datum_ukonceni' => 'required|date|after_or_equal:datum_zahajeni',
             'Mnozstvi_casu' => 'nullable|numeric|min:0',
-            'planovana_naklady' => 'nullable|numeric|min:0',
+            'planovane_naklady' => 'nullable|numeric|min:0',
         ], [
             'nazev.required' => 'Pole název je povinné.',
             'nazev.max' => 'Název projektu nesmí být delší než 255 znaků.',
@@ -46,12 +46,13 @@ class ProjektyController extends Controller
             'datum_ukonceni.required' => 'Datum ukončení projektu je povinné.',
             'datum_ukonceni.after_or_equal' => 'Datum ukončení musí být po nebo rovno datu zahájení.',
             'Mnozstvi_casu.numeric' => 'Množství času musí být číslo.',
-            'planovana_naklady.numeric' => 'Plánované náklady musí být číslo.',
+            'planovane_naklady.numeric' => 'Plánované náklady musí být číslo.',
         ]);
 
         // Pokud nejsou hodnoty zadány, nahradí se nulou
         $mnozstvi_casu = $request->filled('Mnozstvi_casu') ? $request->input('Mnozstvi_casu') : 0;
-        $planovana_naklady = $request->filled('planovana_naklady') ? $request->input('planovana_naklady') : 0;
+        $planovane_naklady = $request->filled('planovane_naklady') ? $request->input('planovane_naklady') : 0;
+        $rozpocet = $request->filled('rozpocet') ? $request->input('rozpocet') : 0;
 
         // Vytvoření nového projektu pro přihlášeného uživatele
         Projekty::create([
@@ -60,7 +61,7 @@ class ProjektyController extends Controller
             'datum_zahajeni' => $validated['datum_zahajeni'],
             'datum_ukonceni' => $validated['datum_ukonceni'],
             'Mnozstvi_casu' => $validated['Mnozstvi_casu'],
-            'planovana_naklady' => $validated['planovana_naklady'],
+            'planovane_naklady' => $validated['planovane_naklady'],
             'uzivatel_id' => auth()->id(), // přiřazení aktuálního přihlášeného uživatele
         ]);
 

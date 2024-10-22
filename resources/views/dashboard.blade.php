@@ -11,6 +11,7 @@
 <x-layouts.app>
 
     <main class="mt-6 md:grid md:grid-cols-2 lg:flex mx-4 gap-4 lg:h-[85vh]">
+
         <div class="bg-cb3 mb-4 rounded-lg shadow-lg p-4 lg:w-1/4">
           <!-- Horní část kalendáře: měsíc a tlačítka -->
           <div class="flex justify-between items-center mb-2">
@@ -456,9 +457,9 @@
                                           </div>
 
                                           <div class="grid grid-cols-2 gap-4 w-full">
-                                              <label for="planovana_naklady" class="font-bold rounded-xl px-4 py-2">Rozpočet:</label>
-                                              <input type="number" name="planovana_naklady" id="planovana_naklady" value="{{ old('planovana_naklady', $projekt->planovana_naklady) }}" class="rounded-xl px-4 py-2">
-                                              @error('planovana_naklady')
+                                              <label for="planovane_naklady" class="font-bold rounded-xl px-4 py-2">Rozpočet:</label>
+                                              <input type="number" name="planovane_naklady" id="planovane_naklady" value="{{ old('planovane_naklady', $projekt->planovane_naklady) }}" class="rounded-xl px-4 py-2">
+                                              @error('planovane_naklady')
                                                   <div class="invalid-feedback text-right text-xs font-bold text-red-600">{{ $message }}</div>
                                               @enderror
                                           </div>

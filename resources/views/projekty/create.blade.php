@@ -56,9 +56,9 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4 w-full">
-                <label for="planovana_naklady" class="form-label">Plánované náklady</label>
-                <input type="number" class="form-control" id="planovana_naklady" name="planovana_naklady" value="{{ old('planovana_naklady') }}">
-            @error('planovana_naklady')
+                <label for="planovane_naklady" class="form-label">Plánované náklady</label>
+                <input type="number" class="form-control" id="planovane_naklady" name="planovane_naklady" value="{{ old('planovane_naklady') }}">
+            @error('planovane_naklady')
                 <div class="invalid-feedback col-span-2 text-right text-xs text-red-600">{{ $message }}</div>
             @enderror
             </div>
