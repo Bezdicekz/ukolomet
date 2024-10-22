@@ -7,9 +7,9 @@
                     </a>
 
                     <nav class="lg:flex hidden gap-4 text-xl ">
-                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./projekty">Projekty</a>
-                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./ukoly">Úkoly</a>
-                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="./report">Reporty</a>
+                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="{{ route('projekty.index') }}">Projekty</a>
+                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="{{ route('ukoly') }}">Úkoly</a>
+                        <a class="py-2 px-4 rounded-md transition duration-700 ease-in-out hover:text-white hover:bg-cbtsec" href="{{ route('report.index') }}">Reporty</a>
                     </nav>
 
                     <div class="lg:flex hidden gap-4 text-xl">
@@ -60,19 +60,19 @@
                         </button>
 
                         <div class="absolute bg-cb3 opacity-90 top-10 right-5 shadow-lg h-auto w-48 p-4 rounded border border-ctprim space-y-2" x-show="open" @click.away="open = false" x-transition>
-                            <a href="./projekty">
+                            <a href="{{ route('projekty.index') }}">
                                 <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Projekty</p>
                             </a>
-                            <a href="./ukol">
-                                <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Nový úkol</p>
+                            <a href="{{ route('ukoly') }}">
+                                <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Úkoly</p>
                             </a>
-                            <a href="./reporty">
+                            <a href="{{ route('report.index') }}">
                                 <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Reporty</p>
                             </a>
-                            <a href="./dashboard">
+                            <a href="{{ route('dashboard') }}">
                                 <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Dashboard</p>
                             </a>
-                            <a href="./profil">
+                            <a href="{{ route('profile.edit') }}">
                                 <p class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer">Profil</p>
                             </a>
 
@@ -85,7 +85,7 @@
                                 </form>
                             @else
                                 <!-- Uživatel není přihlášený - zobrazit ikonu pro přihlášení -->
-                                <a class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer" href="./login" title="Přihlášení">Přihlášení
+                                <a class="transition duration-500 ease-in-out p-2 hover:bg-cbtsec rounded-lg font-bold cursor-pointer" href="{{ route('login') }}" title="Přihlášení">Přihlášení
                                 </a>
                             @endif
 
@@ -98,16 +98,16 @@
             {{$slot}}
 
     <footer class="bg-ctsec">
-      <div class="text-cb1 my-6 px-6 py-6 md:grid md:grid-cols-2 lg:flex md:mx-20 lg:mx-48">
-          <ul class="text-center w-1/3">
+      <div class="text-cb1 my-2 px-2 py-6 md:grid md:grid-cols-2 lg:flex md:mx-20 lg:mx-48">
+          <ul class="text-center md:w-1/2 lg:w-1/3">
               <li class="text-xl font-bold pb-4">Informace</li>
-              <p class="px-20">Úkolomet je webová aplikace, která pomáhá s organizací úkolů. Po přihlášení se zobrazí další volby a nastavení.</p>
+              <p class="px-2">Úkolomet je webová aplikace, která pomáhá s organizací úkolů. Po přihlášení se zobrazí další volby a nastavení.</p>
               <p>Všechny osobní údaje budou použity výhradně pro účely této aplikace.</p>
               <p class="text-xl font-bold pt-6 pb-2">Více informací:</p>
               <a class="font-bold hover:text-cb2" href="./osobni-udaje">Zpracování osobních údajů</a>
           </ul>
 
-          <ul class="text-center w-1/3">
+          <ul class="text-center md:w-1/2 lg:w-1/3">
               <li class="text-xl font-bold pb-4">Kontakt</li>
               <li class="font-bold py-2">Adresa</li>
               <li class="text-cb3 font-bold">Zdeněk Bezdíček</li>
@@ -119,7 +119,7 @@
               <li>zdenek.bezdicek@gmail.com</li>
           </ul>
 
-          <ul class="flex flex-col gap-2 text-center w-1/3">
+          <ul class="flex flex-col gap-2 text-center lg:w-1/3">
               <li class="px-3 text-xl font-bold pb-4">Odkazy</li>
               <li class="px-3 font-bold py-2">Úkolomet</li>
               <li><a class="px-3 py-2 rounded-lg hover:text-cb2" href="./">Hlavní stránka</a></li>

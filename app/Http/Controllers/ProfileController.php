@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,7 @@ class ProfileController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
-        $user->{'hodinova_sazba'} = $request->input('hodinova_sazba');
+        $user->hodinova_sazba = $request->input('hodinova_sazba');
         $user->save();
 
         return redirect()->route('profile.edit')->with('status', 'Profil byl úspěšně aktualizován.');

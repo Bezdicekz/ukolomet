@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/ukoly', [DashboardController::class, 'ukoly'])->name('ukoly');
 
-    Route::get('projekty', [ProjektyController::class, 'index'])->name('projekty.index');
+    Route::get('/projekty', [ProjektyController::class, 'index'])->name('projekty.index');
     Route::get('projekty/create', [ProjektyController::class, 'create'])->name('projekty.create');
     Route::post('projekty', [ProjektyController::class, 'store'])->name('projekty.store');
     Route::get('projekty/{id}/edit', [ProjektyController::class, 'edit'])->name('projekty.edit');
